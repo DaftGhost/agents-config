@@ -1,0 +1,4 @@
+ignore = ["references.broken-link"]
+
+[frontmatter]
+extension_fields = ["compatibility", "whenToUse"]

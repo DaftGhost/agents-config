@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Python (in case scripts/ is added later)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local secrets (this skill ships none, but keep guard)
+.env
