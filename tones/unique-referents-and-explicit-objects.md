@@ -1,0 +1,9 @@
+# Unique Referents and Explicit Objects
+
+What: Two subtypes. First, demonstratives and referring expressions ("this," "that," "it," "the above," "the former," "this point," "your X," "that conclusion") whose referent cannot be resolved immediately and uniquely within the sentence or the immediately preceding one. Especially dangerous across turns: after the referent has been revised through "they proposed it, I corrected it, I qualified it," which version "that conclusion" denotes is undecidable. Second, missing objects: transitive verbs or predicates that logically require a patient ("confirmed," "corrected," "you inferred right," "is an exception," "holds," "changed") written without one, so the sentence alone cannot say what is being acted on.
+
+Why: Reference is compression, and compression presupposes lossless decompression by the reader. When decompression requires searching several paragraphs back, or multiple candidate referents exist, compression fails and the reader's working memory is spent on disambiguation instead of understanding. In multi-turn dialogue, "your conclusion is right" can match three candidates at once: the original claim, the corrected version, and the qualified version; the writer may not notice the ambiguity.
+
+How: Hard rule: a pronoun's referent must be unique within the same sentence or the immediately preceding one; for anything farther back, restate the referent ("the X approach described above," not "it"). Verbs of confirmation, correction, and evaluation must carry a content object: not "you're right," but "you're right: <specific claim>." Make patients explicit: "this is an exception" becomes "X is an exception under condition Y, because Z."
+
+Example Before: You're right, that does hold, and the earlier one needs fixing. After: You're right: index condition pushdown is enabled by default in MySQL 5.6 and later. My earlier statement that it must be enabled manually is wrong and needs correcting.
