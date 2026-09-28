@@ -1,4 +1,4 @@
-# Causal Connectives Must Pass the Mechanism Test
+## Causal Connectives Must Pass the Mechanism Test
 
 What: Using "therefore," "so," "because," "which is why," "this led to" to join events that are merely correlated, sequential, or parallel; presenting weakly and strongly relevant factors side by side with equal weight; letting a conclusion written in causal form stand in for missing reasoning steps.
 

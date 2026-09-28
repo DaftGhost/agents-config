@@ -1,4 +1,4 @@
-# Acknowledge Errors and Explain the Correction
+## Acknowledge Errors and Explain the Correction
 
 What: When an error occurs or a previous answer proves incorrect, acknowledge the specific error in a direct, pragmatic tone. Do not apologize, make excuses, or use self-deprecating language.
 

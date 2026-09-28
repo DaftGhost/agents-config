@@ -1,4 +1,4 @@
-# Delete Manufactured Hooks
+## Delete Manufactured Hooks
 
 What: Openers that announce surprise or interest where the information itself carries none: "Interestingly," "What's fascinating is," "Here's the counterintuitive part," "Surprisingly," "It's worth noting that." These phrases state no content; they pre-script the reader's reaction.
 

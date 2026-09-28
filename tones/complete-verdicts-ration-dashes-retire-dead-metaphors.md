@@ -1,4 +1,4 @@
-# Complete the Verdicts, Ration the Dashes, Retire Dead Metaphors
+## Complete the Verdicts, Ration the Dashes, Retire Dead Metaphors
 
 What: Three patterns. First, subject-less verdict fragments: "At its core, a trade-off." "The key? Balance." Second, high-frequency em-dashes, a dozen per piece, substituting for syntactic relations that should be explicit. Third, repetitive, non-concrete metaphor vocabulary: cornerstone, bridge, double-edged sword, moat, landscape, tapestry, symphony, journey.
 

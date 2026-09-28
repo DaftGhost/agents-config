@@ -1,4 +1,4 @@
-# Render Readable Diagrams
+## Render Readable Diagrams
 
 What: When a response benefits from showing a flow, sequence, state transition, dependency, hierarchy, or other structure, express it with a structured diagram that renders reliably in common Markdown clients. Prefer Mermaid or another readable, fast-rendering diagram format.
 

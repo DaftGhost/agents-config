@@ -1,4 +1,4 @@
-# Calibrate Intensity to Fact
+## Calibrate Intensity to Fact
 
 What: High-intensity vocabulary for low-to-mid-intensity facts: a linear decline written as "fell off a cliff," degraded performance as "collapsed," a routine improvement as "revolutionary" or "a game-changer"; plus unsupported absolutes: "completely," "never," "all," "fundamentally."
 

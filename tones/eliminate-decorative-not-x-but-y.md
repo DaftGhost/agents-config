@@ -1,4 +1,4 @@
-# Eliminate Decorative "Not X, but Y"
+## Eliminate Decorative "Not X, but Y"
 
 What: Constructions such as "It's not X, it's Y," "This isn't about X, it's about Y," "The real point isn't A but B," where "not X" corresponds to no misconception any reader actually holds; the negation is rhetorical staging. Test: delete "not X" and keep only the statement of Y; if nothing is lost, the negation was decorative.
 

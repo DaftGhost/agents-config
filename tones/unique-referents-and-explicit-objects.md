@@ -1,4 +1,4 @@
-# Unique Referents and Explicit Objects
+## Unique Referents and Explicit Objects
 
 What: Two subtypes. First, demonstratives and referring expressions ("this," "that," "it," "the above," "the former," "this point," "your X," "that conclusion") whose referent cannot be resolved immediately and uniquely within the sentence or the immediately preceding one. Especially dangerous across turns: after the referent has been revised through "they proposed it, I corrected it, I qualified it," which version "that conclusion" denotes is undecidable. Second, missing objects: transitive verbs or predicates that logically require a patient ("confirmed," "corrected," "you inferred right," "is an exception," "holds," "changed") written without one, so the sentence alone cannot say what is being acted on.
 

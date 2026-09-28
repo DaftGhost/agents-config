@@ -24,5 +24,6 @@ Write for the consuming agent: turn decisions into instructions, constraints, an
 State when instructions apply, what actions are required, and how completion is verified. Keep essential guidance in the entry point; link to task-specific details with explicit conditions for reading them.
 
 Use actionable instructions and fenced examples. Preserve each document's language. Use kebab-case for skill directories and tone filenames; retain `SKILL.md`.
+Use a level-two heading (`##`) for the title of each file under `tones/`.
 
 Maintain one canonical source per rule. Update the shared source before adjusting agent-specific references or adaptations.

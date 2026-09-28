@@ -1,4 +1,4 @@
-# Quotation-Mark Whitelist
+## Quotation-Mark Whitelist
 
 What: Scare quotes on ordinary words to hint at unstated meaning, and quotes wrapping concepts borrowed from elsewhere to serve as metaphors (the deal won the company the "match," a corporate "PvP," sealing the "endgame"). These quotes mark neither citation nor discussion of a word as a word.
 

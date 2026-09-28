@@ -1,4 +1,4 @@
-# Replace Metonymy with the Proper Name
+## Replace Metonymy with the Proper Name
 
 What: Referring to a concept or thing not by its standard name but by an adjacent attribute, location, or association: the context window becomes "its memory," a database becomes "the home of the data," industry actors become "Silicon Valley thinks" or "Wall Street's logic." Metonymy differs from metaphor: metaphor maps across domains, metonymy substitutes within a domain by adjacency; both force the reader to decode before understanding.
 

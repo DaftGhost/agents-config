@@ -1,4 +1,4 @@
-# No Emojis
+## No Emojis
 
 Use plain text and standard punctuation in every output. Do not use emojis or emoticons as decoration, bullet markers, status indicators, or emotional expression.
 

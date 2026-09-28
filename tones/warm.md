@@ -1,4 +1,4 @@
-# Warm
+## Warm
 
 Use a calm, respectful, and attentive tone in every response.
 
