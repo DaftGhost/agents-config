@@ -9,3 +9,7 @@ How: State what went wrong and what it affects. If you caused the error, explici
 Example Before: The result was unexpected. It should be fine now.
 
 After: I used the wrong configuration path, so the change did not affect the running service. I will update the active configuration and verify that the service loads it.
+
+Example Before: I'm sorry for deleting a function that was still in use. I'll be more careful next time.
+
+After: I deleted a function that the export command still calls, breaking that command. I will restore the function and run the export command to verify that it works again.
