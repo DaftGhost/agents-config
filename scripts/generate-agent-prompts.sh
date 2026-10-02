@@ -4,7 +4,7 @@ set -eo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 BASE_PROMPT="$REPO_ROOT/.agents/AGENTS.md"
-TONES_DIR="$REPO_ROOT/tones"
+ASIDE_DIR="$REPO_ROOT/aside"
 
 if [[ ! -t 0 ]]; then
   printf 'Run this prompt generator in an interactive terminal.\n' >&2
@@ -22,9 +22,9 @@ TARGET_PATHS=(
   "$HOME/.agents/AGENTS.md"
   "$HOME/.dsh/AGENTS.md"
 )
-TONE_FILES=()
-for tone in "$TONES_DIR"/*.md; do
-  [[ -f "$tone" ]] && TONE_FILES+=("$tone")
+ASIDE_FILES=()
+for file in "$ASIDE_DIR"/*/*.md; do
+  [[ -f "$file" ]] && ASIDE_FILES+=("$file")
 done
 
 stage() { printf '\n== %s ==\n' "$1"; }
@@ -71,7 +71,7 @@ add_destination() {
     printf 'Cannot use a source prompt as an output destination: %s\n' "$EXPANDED_PATH" >&2
     return 1
   fi
-  for source_file in "${TONE_FILES[@]}"; do
+  for source_file in "${ASIDE_FILES[@]}"; do
     if [[ "$EXPANDED_PATH" == "$source_file" ]]; then
       printf 'Cannot use a source prompt as an output destination: %s\n' "$EXPANDED_PATH" >&2
       return 1
@@ -198,23 +198,23 @@ if (( ${#DEST_PATHS[@]} == 0 )); then
   exit 1
 fi
 
-stage '2/3 Choose tone files'
-TONE_OPTIONS=()
-for tone in "${TONE_FILES[@]}"; do TONE_OPTIONS+=("$(basename "$tone" .md)"); done
-select_many 'The shared behavior prompt is always included. Choose optional tone files:' true "${TONE_OPTIONS[@]}"
-SELECTED_TONES=("${SELECTED[@]}")
+stage '2/3 Choose aside files'
+ASIDE_OPTIONS=()
+for file in "${ASIDE_FILES[@]}"; do ASIDE_OPTIONS+=("${file#"$ASIDE_DIR/"}"); done
+select_many 'The shared behavior prompt is always included. Choose optional aside files:' true "${ASIDE_OPTIONS[@]}"
+SELECTED_ASIDES=("${SELECTED[@]}")
 
 CONTENT_FILE="$(mktemp "${TMPDIR:-/tmp}/agent-prompt.XXXXXX")"
 trap 'rm -f "$CONTENT_FILE"' EXIT
 cat "$BASE_PROMPT" > "$CONTENT_FILE"
-for index in "${SELECTED_TONES[@]}"; do
+for index in "${SELECTED_ASIDES[@]}"; do
   printf '\n\n' >> "$CONTENT_FILE"
-  cat "${TONE_FILES[$index]}" >> "$CONTENT_FILE"
+  cat "${ASIDE_FILES[$index]}" >> "$CONTENT_FILE"
 done
 
 stage '3/3 Review and write'
 printf 'Included files:\n  %s\n' "$BASE_PROMPT"
-for index in "${SELECTED_TONES[@]}"; do printf '  %s\n' "${TONE_FILES[$index]}"; done
+for index in "${SELECTED_ASIDES[@]}"; do printf '  %s\n' "${ASIDE_FILES[$index]}"; done
   printf '\nDestinations:\n'
 for index in "${!DEST_PATHS[@]}"; do
   target="${DEST_PATHS[$index]}"

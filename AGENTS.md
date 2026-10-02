@@ -13,7 +13,7 @@ This project authors instructions for agents: behavioral rules, skills, workflow
 - `.claude/skills/` provides relative symlinks to shared skills.
 - `.claude/rules/` holds Claude-specific rules with YAML `paths` frontmatter.
 - `.codex/` contains Codex-specific configuration and adaptations.
-- `tones/` contains response and writing style rules and examples.
+- `aside/` contains optional instruction modules grouped by subfolder; `aside/tones/` contains response and writing style rules and examples.
 
 ## Instruction Writing & Naming Conventions
 
@@ -24,6 +24,6 @@ Write for the consuming agent: turn decisions into instructions, constraints, an
 State when instructions apply, what actions are required, and how completion is verified. Keep essential guidance in the entry point; link to task-specific details with explicit conditions for reading them.
 
 Use actionable instructions and fenced examples. Preserve each document's language. Use kebab-case for skill directories and tone filenames; retain `SKILL.md`.
-Use a level-two heading (`##`) for the title of each file under `tones/`.
+Use a level-two heading (`##`) for the title of each file under `aside/tones/`.
 
 Maintain one canonical source per rule. Update the shared source before adjusting agent-specific references or adaptations.
