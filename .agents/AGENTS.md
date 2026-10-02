@@ -115,8 +115,10 @@ Every program is a bounded system. Before implementation, define the strongest t
 
 ### Branches
 
-- For a large change, create a feature branch from `master`, develop on that branch, complete review, and then merge it back into `master`. Do not commit directly to `master` for a large change.
-- A clearly scoped bug fix may be changed and committed directly on `master`. If the fix grows into a large refactor, create a new branch.
+The target branch is the integration branch designated by the user or repository conventions.
+
+- For a large change, create a feature branch from the target branch, develop on that branch, complete review, and then merge it back into the target branch. Do not commit directly to the target branch for a large change.
+- A clearly scoped bug fix may be changed and committed directly on the target branch. If the fix grows into a large refactor, create a new branch.
 
 ### Merging
 
