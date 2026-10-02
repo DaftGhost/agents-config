@@ -6,14 +6,17 @@ This project authors instructions for agents: behavioral rules, skills, workflow
 
 ## Project Structure & Module Organization
 
-`.agents/` is the source of truth for shared content. Other agent directories contain agent-specific content and adaptations. Add shared guidance to `.agents/`; reference or adapt it from the relevant agent directory.
+`.agents/` is the source of truth for shared behavioral instructions and skills; `aside/` holds canonical optional instruction modules. Other agent directories contain agent-specific content and adaptations. Update the relevant shared source before referencing or adapting it for an agent.
 
-- `.agents/AGENTS.md` contains shared behavioral and Git guidance.
+- `.agents/AGENTS.md` contains the shared behavioral instructions always included by the prompt generator.
 - `.agents/skills/<skill-name>/` holds `SKILL.md` entry points and references.
 - `.claude/skills/` provides relative symlinks to shared skills.
 - `.claude/rules/` holds Claude-specific rules with YAML `paths` frontmatter.
 - `.codex/` contains Codex-specific configuration and adaptations.
-- `aside/` contains optional instruction modules grouped by subfolder; `aside/tones/` contains response and writing style rules and examples.
+- `aside/tones/` contains response and writing style rules and examples.
+- `aside/tools/` contains tool-use guidance and Git conventions.
+- `aside/coding-design/` contains coding and design guidance, including input-contract validation and logging responsibilities.
+- `aside/understanding/` contains guidance for interpreting user questions and maintaining independent judgment.
 
 ## Instruction Writing & Naming Conventions
 
@@ -27,3 +30,4 @@ Use actionable instructions and fenced examples. Preserve each document's langua
 Use a level-two heading (`##`) for the title of each file under `aside/tones/`.
 
 Maintain one canonical source per rule. Update the shared source before adjusting agent-specific references or adaptations.
+When moving, renaming, or merging instruction documents, update responsibility descriptions and references, then check for obsolete paths and duplicate rules.
