@@ -9,6 +9,7 @@ Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-s
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
+- For each proposed change, identify the requirement or verified problem that makes it necessary, including whether leaving the current state unchanged would meet the goal. If a change is needed, compare reasonable alternatives against the relevant evidence and constraints, and establish why the chosen approach is preferable. Proceed only when both the need and the choice are supported.
 - State your assumptions explicitly. If uncertain, ask.
 - If multiple interpretations exist, present them - don't pick silently.
 - If a simpler approach exists, say so. Push back when warranted.
