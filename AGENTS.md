@@ -13,12 +13,8 @@ This project authors instructions for agents: behavioral rules, skills, workflow
 - `.claude/skills/` provides relative symlinks to shared skills.
 - `.claude/rules/` holds Claude-specific rules with YAML `paths` frontmatter.
 - `.codex/` contains Codex-specific configuration and adaptations.
-- `aside/tones/` contains response and writing style rules and examples.
-- `aside/tools/` contains tool-use guidance and Git conventions.
-- `aside/coding/` contains the coding guidelines, input-contract validation guidance, and logging responsibility guidance.
-- `aside/thinking/` contains guidance for defining capability boundaries and confirming compatibility and retention choices.
-- `aside/understanding/` contains guidance for interpreting user questions and maintaining independent judgment.
-- `aside/mnemonics/` contains short, memorable rules of thumb for agent behavior.
+
+Organize aside modules by their instruction purpose. Use the current directory tree and module contents to identify categories and their responsibilities. Before placing a rule, inspect the existing categories and reuse one that fits its purpose. Create a new category only when no existing category covers that purpose.
 
 ## Instruction Writing & Naming Conventions
 
@@ -28,8 +24,8 @@ Write for the consuming agent: turn decisions into instructions, constraints, an
 
 State when instructions apply, what actions are required, and how completion is verified. Keep essential guidance in the entry point; link to task-specific details with explicit conditions for reading them.
 
-Use actionable instructions and fenced examples. Preserve each document's language. Use kebab-case for skill directories and tone filenames; retain `SKILL.md`.
-Use a level-two heading (`##`) for the title of each file under `aside/tones/`.
+Use actionable instructions and fenced examples. Preserve each document's language. Use kebab-case for skill directories and for names of directories and files under `aside/`; retain `SKILL.md`.
+Use one level-two heading (`##`) as the main title of each aside file, with deeper headings for subsections.
 
 Maintain one canonical source per rule. Update the shared source before adjusting agent-specific references or adaptations.
 When moving, renaming, or merging instruction documents, update responsibility descriptions and references, then check for obsolete paths and duplicate rules.
