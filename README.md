@@ -1,6 +1,8 @@
 # Agent prompt generator
 
-This repository stores shared agent instructions in `.agents/AGENTS.md` and optional modules in `aside/`, including response and writing style rules in `aside/tones/`. Use the interactive generator to replace prompts or merge selected modules into existing agent configuration files.
+This repository stores the base prompt heading in `.agents/AGENTS.md` and optional instruction modules in `aside/`, including coding guidance in `aside/coding/` and response and writing style rules in `aside/tones/`. Use the interactive generator to replace prompts or merge selected modules into existing agent configuration files.
+
+Select `coding/coding-guideline.md` to include the coding guidelines in a generated prompt.
 
 ```bash
 ./scripts/generate-agent-prompts.sh
