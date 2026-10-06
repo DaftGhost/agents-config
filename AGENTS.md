@@ -16,6 +16,7 @@ This project authors instructions for agents: behavioral rules, skills, workflow
 - `aside/tones/` contains response and writing style rules and examples.
 - `aside/tools/` contains tool-use guidance and Git conventions.
 - `aside/coding-design/` contains coding and design guidance, including input-contract validation and logging responsibilities.
+- `aside/thinking/` contains guidance for defining capability boundaries and confirming compatibility and retention choices.
 - `aside/understanding/` contains guidance for interpreting user questions and maintaining independent judgment.
 - `aside/mnemonics/` contains short, memorable rules of thumb for agent behavior.
 
