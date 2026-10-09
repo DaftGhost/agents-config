@@ -130,6 +130,15 @@
       "installedAt": "2026-08-16T12:53:34.931Z",
       "updatedAt": "2026-08-16T12:53:34.931Z"
     },
+    "design-by-contract": {
+      "source": "PlunderStruck/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/PlunderStruck/agent-skills.git",
+      "skillPath": "skills/design-by-contract/SKILL.md",
+      "skillFolderHash": "44cd1e238b37174aaff9a0722a8e6f1e4a925379",
+      "installedAt": "2026-10-09T09:06:30.000Z",
+      "updatedAt": "2026-10-09T09:06:30.000Z"
+    },
     "domain-modeling": {
       "source": "mattpocock/skills",
       "sourceType": "github",
