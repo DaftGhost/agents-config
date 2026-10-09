@@ -344,7 +344,7 @@ expand_destination_path() {
 }
 
 add_destination() {
-  local label="$1" input="$2" existing source_file parent
+  local label="$1" input="$2" existing source_file parent index
   if ! expand_destination_path "$input"; then return 1; fi
   if [[ "$input" == */ ]]; then
     printf 'That path is a directory path. Enter a file path instead: %s\n' "$EXPANDED_PATH" >&2
@@ -367,13 +367,15 @@ add_destination() {
     printf 'Cannot use a source prompt as an output destination: %s\n' "$EXPANDED_PATH" >&2
     return 1
   fi
-  for source_file in "${ASIDE_FILES[@]}"; do
+  for (( index=0; index<${#ASIDE_FILES[@]}; index++ )); do
+    source_file="${ASIDE_FILES[$index]}"
     if [[ "$EXPANDED_PATH" == "$source_file" ]]; then
       printf 'Cannot use a source prompt as an output destination: %s\n' "$EXPANDED_PATH" >&2
       return 1
     fi
   done
-  for existing in "${DEST_PATHS[@]}"; do
+  for (( index=0; index<${#DEST_PATHS[@]}; index++ )); do
+    existing="${DEST_PATHS[$index]}"
     if [[ "$existing" == "$EXPANDED_PATH" ]]; then
       printf 'Already selected: %s\n' "$EXPANDED_PATH"
       return 0
@@ -384,7 +386,7 @@ add_destination() {
 }
 
 select_destinations() {
-  local choice token index number valid duplicate existing
+  local choice token index number valid duplicate existing selected_index
   local -a tokens
   SELECTED=()
   CUSTOM_SELECTED=false
@@ -420,7 +422,8 @@ select_destinations() {
       fi
       index=$((number - 1))
       duplicate=false
-      for existing in "${SELECTED[@]}"; do
+      for (( selected_index=0; selected_index<${#SELECTED[@]}; selected_index++ )); do
+        existing="${SELECTED[$selected_index]}"
         if [[ "$existing" == "$index" ]]; then duplicate=true; fi
       done
       if [[ "$duplicate" == false ]]; then SELECTED+=("$index"); fi
@@ -431,12 +434,12 @@ select_destinations() {
 }
 
 select_many() {
-  local title="$1" allow_empty="$2" choice token index number valid duplicate existing
+  local title="$1" allow_empty="$2" choice token index number valid duplicate existing selected_index
   shift 2
   local -a options=("$@") tokens
   SELECTED=()
   say "$title"
-  for index in "${!options[@]}"; do printf '  %d) %s\n' "$((index + 1))" "${options[$index]}"; done
+  for (( index=0; index<${#options[@]}; index++ )); do printf '  %d) %s\n' "$((index + 1))" "${options[$index]}"; done
   if [[ "$allow_empty" == true ]]; then
     printf 'Enter numbers separated by commas, "all", or press Enter for none.\n'
   else
@@ -446,7 +449,7 @@ select_many() {
     ask choice '>'
     SELECTED=()
     if [[ "$choice" == all ]]; then
-      for index in "${!options[@]}"; do SELECTED+=("$index"); done
+      for (( index=0; index<${#options[@]}; index++ )); do SELECTED+=("$index"); done
       return
     fi
     if [[ -z "$choice" && "$allow_empty" == true ]]; then return; fi
@@ -460,7 +463,8 @@ select_many() {
       if (( number < 1 || number > ${#options[@]} )); then valid=false; break; fi
       index=$((number - 1))
       duplicate=false
-      for existing in "${SELECTED[@]}"; do
+      for (( selected_index=0; selected_index<${#SELECTED[@]}; selected_index++ )); do
+        existing="${SELECTED[$selected_index]}"
         if [[ "$existing" == "$index" ]]; then duplicate=true; fi
       done
       if [[ "$duplicate" == false ]]; then SELECTED+=("$index"); fi
@@ -528,10 +532,12 @@ fi
 
 stage 'Choose destination agents and paths'
 select_destinations
-SELECTED_TARGETS=("${SELECTED[@]}")
 DEST_NAMES=()
 DEST_PATHS=()
-for index in "${SELECTED_TARGETS[@]}"; do add_destination "${TARGET_NAMES[$index]}" "${TARGET_PATHS[$index]}"; done
+for (( index=0; index<${#SELECTED[@]}; index++ )); do
+  target_index="${SELECTED[$index]}"
+  add_destination "${TARGET_NAMES[$target_index]}" "${TARGET_PATHS[$target_index]}"
+done
 if [[ "$CUSTOM_SELECTED" == true ]]; then
   printf 'Enter a custom output file path (absolute path or ~/path). Existing directories are rejected; a new file may be created at a path that does not exist yet.\n'
   custom_added=false
@@ -552,18 +558,27 @@ fi
 
 stage 'Choose aside files'
 ASIDE_OPTIONS=()
-for file in "${ASIDE_FILES[@]}"; do ASIDE_OPTIONS+=("${file#"$ASIDE_DIR/"}"); done
+for (( index=0; index<${#ASIDE_FILES[@]}; index++ )); do
+  file="${ASIDE_FILES[$index]}"
+  ASIDE_OPTIONS+=("${file#"$ASIDE_DIR/"}")
+done
 if [[ "$WRITE_MODE" == append ]]; then
   aside_title='Choose aside files to append or replace matching sections; shared instructions will not be added:'
 else
   aside_title='The shared behavior prompt is always included. Choose optional aside files:'
 fi
-select_many "$aside_title" true "${ASIDE_OPTIONS[@]}"
-SELECTED_ASIDES=("${SELECTED[@]}")
+if (( ${#ASIDE_OPTIONS[@]} == 0 )); then
+  select_many "$aside_title" true
+else
+  select_many "$aside_title" true "${ASIDE_OPTIONS[@]}"
+fi
 SELECTED_ASIDE_FILES=()
-for index in "${SELECTED_ASIDES[@]}"; do SELECTED_ASIDE_FILES+=("${ASIDE_FILES[$index]}"); done
+for (( index=0; index<${#SELECTED[@]}; index++ )); do
+  aside_index="${SELECTED[$index]}"
+  SELECTED_ASIDE_FILES+=("${ASIDE_FILES[$aside_index]}")
+done
 if [[ "$WRITE_MODE" == append ]]; then
-  if (( ${#SELECTED_ASIDES[@]} == 0 )); then
+  if (( ${#SELECTED[@]} == 0 )); then
     printf '\nNo aside files selected; no files will be written.\n'
     exit 0
   fi
@@ -572,7 +587,8 @@ fi
 CONTENT_FILE="$WORK_DIR/content"
 if [[ "$WRITE_MODE" == replace ]]; then
   cat "$BASE_PROMPT" > "$CONTENT_FILE"
-  for file in "${SELECTED_ASIDE_FILES[@]}"; do
+  for (( index=0; index<${#SELECTED_ASIDE_FILES[@]}; index++ )); do
+    file="${SELECTED_ASIDE_FILES[$index]}"
     printf '\n\n' >> "$CONTENT_FILE"
     cat "$file" >> "$CONTENT_FILE"
   done
@@ -581,7 +597,10 @@ fi
 stage 'Review and write'
 printf 'Write mode: %s\nIncluded files:\n' "$WRITE_MODE"
 if [[ "$WRITE_MODE" == replace ]]; then printf '  %s\n' "$BASE_PROMPT"; fi
-for file in "${SELECTED_ASIDE_FILES[@]}"; do printf '  %s\n' "$file"; done
+for (( index=0; index<${#SELECTED_ASIDE_FILES[@]}; index++ )); do
+  file="${SELECTED_ASIDE_FILES[$index]}"
+  printf '  %s\n' "$file"
+done
 printf '\nDestinations:\n'
 DEST_CONTENTS=()
 DEST_SNAPSHOTS=()
@@ -606,7 +625,11 @@ for index in "${!DEST_PATHS[@]}"; do
     snapshot="$WORK_DIR/snapshot.$index"
     content="$WORK_DIR/content.$index"
     cp -p "$target" "$snapshot"
-    merge_sections "$snapshot" "$content" "${SELECTED_ASIDE_FILES[@]}"
+    if (( ${#SELECTED_ASIDE_FILES[@]} == 0 )); then
+      merge_sections "$snapshot" "$content"
+    else
+      merge_sections "$snapshot" "$content" "${SELECTED_ASIDE_FILES[@]}"
+    fi
     DEST_CONTENTS[$index]="$content"
     DEST_SNAPSHOTS[$index]="$snapshot"
     printf '    (existing regular file; matching sections will be replaced, other content retained)\n'
@@ -728,4 +751,7 @@ done
 finish
 say 'Prompt generation complete.'
 for target in "${WRITE_PATHS[@]}"; do say "Wrote $target"; done
-for target in "${SKIPPED_PATHS[@]}"; do note "Left unchanged: $target"; done
+for (( index=0; index<${#SKIPPED_PATHS[@]}; index++ )); do
+  target="${SKIPPED_PATHS[$index]}"
+  note "Left unchanged: $target"
+done
