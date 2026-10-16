@@ -22,10 +22,14 @@ When creating or editing agent-facing content, choose an approach suited to the 
 
 Write for the consuming agent: turn decisions into instructions, constraints, and reference material it can use. Keep the author's deliberations, work logs, and explanations to the user in the conversation rather than in the guidance. Before saving, check that each passage helps the agent decide what to do or how to do it.
 
-State when instructions apply, what actions are required, and how completion is verified. Keep essential guidance in the entry point; link to task-specific details with explicit conditions for reading them.
+State when instructions apply, what actions are required, and how completion is verified.
+
+Use progressive disclosure: keep core constraints and enough guidance to select the next action in the entry point. Put task-specific procedures, extended examples, and reference material in linked documents, with explicit conditions for when to read each one. Require reading only the material relevant to the current task; keep mandatory constraints visible before the actions they govern.
 
 Use actionable instructions and fenced examples. Preserve each document's language. Use kebab-case for skill directories and for names of directories and files under `aside/`; retain `SKILL.md`.
 Use one level-two heading (`##`) as the main title of each aside file, with deeper headings for subsections.
 
-Maintain one canonical source per rule. Update the shared source before adjusting agent-specific references or adaptations.
+Avoid redundancy: before adding guidance, check for an existing rule that covers the same decision. Extend or clarify that rule instead of restating it in another paragraph, checklist, example, or document. Keep each passage only if it adds a distinct constraint, decision criterion, or necessary example.
+
+Maintain one canonical source per rule; reference it instead of copying its content. Update the shared source before adjusting agent-specific references or adaptations.
 When moving, renaming, or merging instruction documents, update responsibility descriptions and references, then check for obsolete paths and duplicate rules.
