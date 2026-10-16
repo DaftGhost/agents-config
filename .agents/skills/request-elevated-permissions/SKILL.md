@@ -1,18 +1,19 @@
-## Use pkexec Safely
+---
+name: request-elevated-permissions
+description: Request narrowly scoped operating-system privileges through pkexec for authorized Linux administration tasks. Use this skill whenever a task needs administrator or another user's privileges, such as changing protected system files, managing system services, or recovering from a confirmed OS-level permission failure, even if the user does not mention pkexec or explicitly ask for elevation. Distinguish OS privileges from sandbox or agent approval before choosing an escalation path.
+disable-model-invocation: false
+user-invocable: true
+---
 
-### What
+# Request Elevated Permissions
 
 Use `pkexec` for a necessary, task-authorized operating-system operation only when the environment permits it. Each authorization request and its execution tool call must contain exactly one direct command for one reviewed operation. Request and execute additional commands separately, inspecting each result before proceeding.
 
-`pkexec` does not replace the environment's sandbox or agent approval mechanism. Obtain required environment approval through that mechanism; never use `pkexec` to bypass a restriction or rejection.
-
-### Why
+`pkexec` does not replace the environment's sandbox or agent approval mechanism. Obtain required environment approval through that mechanism; never use `pkexec` to bypass a restriction or rejection. For sandbox or agent permission recovery, follow [Request Required Permissions and Continue](../../../aside/tools/request-required-permissions-and-continue.md).
 
 Administrator privileges magnify the effects of incorrect paths, arguments, and hidden operations. A single scoped command makes the requested action reviewable. `pkexec` does not validate its program's arguments, and authentication does not establish that those arguments are safe.
 
-### How
-
-#### 1. Establish the Need and Scope
+## 1. Establish the Need and Scope
 
 Check whether the operation can run with ordinary user privileges. Identify the exact resource, required target user, intended change, and material side effects. Use `root` only when the operation requires it. Preserve existing task authorization; clarify only missing scope or effects that exceed it.
 
@@ -20,7 +21,7 @@ Confirm that `pkexec` is installed and that a usable system authentication agent
 
 Complete this step when elevation is necessary, the operation is within the user's authorized scope, and the environment permits the execution path.
 
-#### 2. Prepare One Reviewable Command
+## 2. Prepare One Reviewable Command
 
 Use this invocation shape, resolving every placeholder before requesting authorization:
 
@@ -38,7 +39,7 @@ pkexec --user <target-user> /absolute/path/to/program <explicit-arguments>
 
 Complete this step when the executable, target user, arguments, affected resources, and side effects are fixed and inspectable, and the request contains no hidden command execution.
 
-#### 3. Request Authorization and Execute
+## 3. Request Authorization and Execute
 
 Present the exact command, why elevation is required, and what it will change or expose. Include any material interruption, data-loss risk, or recovery limit. Request permission only for that invocation; exclude broad executable-prefix approvals or persistent access grants.
 
@@ -48,7 +49,7 @@ Execute exactly the reviewed invocation through the permitted tool after require
 
 Complete this step when the command has finished and its output and exit status are available, or when cancellation, denial, or an execution failure has been identified. An authorization prompt alone does not prove execution.
 
-#### 4. Verify the Result and Handle Failure
+## 4. Verify the Result and Handle Failure
 
 Verify the intended resource state in a separate, preferably unprivileged call. A zero exit status supports command completion; it does not by itself prove a service is healthy or that a wider workflow completed. If verification also requires elevation, submit it as another single-command request.
 
@@ -58,7 +59,7 @@ After cancellation or denial, stop that privileged operation. Retry only when ne
 
 Complete the operation when verification supports the intended result, or report the precise unresolved condition and continuation path while continuing unaffected work.
 
-### Examples
+## Examples
 
 For a task that authorizes restarting the specific service, request only this command:
 
