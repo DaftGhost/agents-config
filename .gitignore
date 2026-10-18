@@ -6,5 +6,9 @@
 ## DOCS
 /docs/
 
+## SKILLS
+/.agents/skills/
+/.claude/skills/
+
 ## TESTS
 /tests/
