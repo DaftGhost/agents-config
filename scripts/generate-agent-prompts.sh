@@ -14,9 +14,9 @@ set -euo pipefail
 
 if [[ -t 1 ]] && command -v tput >/dev/null 2>&1 && [[ "$(tput colors 2>/dev/null || echo 0)" -ge 8 ]]; then
   BOLD=$(tput bold); DIM=$(tput dim); RESET=$(tput sgr0)
-  BLUE=$(tput setaf 4); GREEN=$(tput setaf 2); YELLOW=$(tput setaf 3); RED=$(tput setaf 1)
+  BLUE=$(tput setaf 4); GREEN=$(tput setaf 2); YELLOW=$(tput setaf 3)
 else
-  BOLD=""; DIM=""; RESET=""; BLUE=""; GREEN=""; YELLOW=""; RED=""
+  BOLD=""; DIM=""; RESET=""; BLUE=""; GREEN=""; YELLOW=""
 fi
 
 # Author sets this at the top of the stages section.
@@ -334,7 +334,7 @@ expand_destination_path() {
   local input="$1"
   case "$input" in
     '~') EXPANDED_PATH="$HOME" ;;
-    '~/'*) EXPANDED_PATH="$HOME/${input:2}" ;;
+    \~/*) EXPANDED_PATH="$HOME/${input:2}" ;;
     /*) EXPANDED_PATH="$input" ;;
     *)
       printf 'Use an absolute path or a path beginning with "~/".\n' >&2
@@ -519,6 +519,7 @@ printf '  1) Replace with shared instructions and selected aside files (default)
 printf '  2) Append selected aside sections to existing regular files only\n'
 while true; do
   ask mode_choice 'Write mode [1]:'
+  # shellcheck disable=SC2154 # ask assigns mode_choice indirectly via printf -v
   case "$mode_choice" in
     ''|1) WRITE_MODE=replace; break ;;
     2) WRITE_MODE=append; break ;;
