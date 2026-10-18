@@ -22,7 +22,7 @@ Generic objects, string-keyed bags, and interchangeable primitive values leave k
 
 6. **Verify the guarantees.** Run the available compiler or static type checker for the affected scope. Verify meaningful guarantees, such as rejection of interchanged identifiers and exhaustive handling of result variants, with focused type checks where supported. Use runtime checks or tests for properties the type system cannot establish, including decoding and value constraints. In languages without static enforcement, use their available type-analysis tools and report the remaining runtime guarantees explicitly. Finish when the checks support the claimed guarantees and any unavailable verification is identified.
 
-Complete the change or review when affected internal contracts use the simplest types that enforce their required distinctions, callers handle supported states and outcomes, and verification separates static guarantees from runtime guarantees. Scope changes to the task; use the `confirm-compatibility-and-retention-choices` skill when changing supported interfaces or formats introduces a compatibility choice.
+Complete the change or review when affected internal contracts use the simplest types that enforce their required distinctions, callers handle supported states and outcomes, and verification separates static guarantees from runtime guarantees. Scope changes to the task; use the `ask-compatibility` skill when changing supported interfaces or formats introduces a compatibility choice.
 
 ### Example
 

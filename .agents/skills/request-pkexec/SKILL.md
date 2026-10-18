@@ -1,11 +1,11 @@
 ---
-name: request-elevated-permissions
+name: request-pkexec
 description: Request narrowly scoped operating-system privileges through pkexec for authorized Linux administration tasks. Use this skill whenever a task needs administrator or another user's privileges, such as changing protected system files, managing system services, or recovering from a confirmed OS-level permission failure, even if the user does not mention pkexec or explicitly ask for elevation. Distinguish OS privileges from sandbox or agent approval before choosing an escalation path.
 disable-model-invocation: false
 user-invocable: true
 ---
 
-# Request Elevated Permissions
+# Request Pkexec
 
 Use `pkexec` for a necessary, task-authorized operating-system operation only when the environment permits it. Each authorization request and its execution tool call must contain exactly one direct command for one reviewed operation. Request and execute additional commands separately, inspecting each result before proceeding.
 

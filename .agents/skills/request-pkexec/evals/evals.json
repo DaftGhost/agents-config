@@ -1,5 +1,5 @@
 {
-  "skill_name": "request-elevated-permissions",
+  "skill_name": "request-pkexec",
   "evals": [
     {
       "id": 1,

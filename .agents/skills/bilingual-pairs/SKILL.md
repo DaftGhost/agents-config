@@ -1,5 +1,5 @@
 ---
-name: translate
+name: bilingual-pairs
 description: Translate text faithfully while keeping original wording, translation, and explanation distinguishable. Use whenever the user asks to translate, provide a bilingual rendering, translate sentence by sentence, or explain content in a language different from the current conversation language, even if they do not explicitly name this skill.
 argument-hint: "[text-or-path-or-url] [target-language]"
 disable-model-invocation: false
@@ -11,7 +11,7 @@ allowed-tools:
   - WebFetch
 ---
 
-# Translate with Clear Attribution
+# Bilingual Pairs with Clear Attribution
 
 Follow the user's requested target language, scope, order, and format. If no target language is specified and the context does not establish one, use the current conversation language.
 

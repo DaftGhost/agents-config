@@ -1,9 +1,9 @@
 ---
-name: confirm-compatibility-and-retention-choices
+name: ask-compatibility
 description: Resolve compatibility and retention choices with the user before implementing a migration, refactor, replacement, or removal that changes what is supported or kept. Use this skill whenever a change would remove, rename, or reshape a public or consumed interface, field, config format, CLI flag, cache key, file format, or package name; whenever old code paths, adapters, or deprecated modules would be kept or deleted; or whenever rows, tables, files, or logs would be dropped, archived, migrated, or deleted. Trigger even when the user only says "clean it up", "drop it", "replace it", "migrate", or "you decide", because general delegation does not settle these choices. Do not use it for internal restructuring with no supported-behavior or data impact, such as extracting private helpers or renaming local variables.
 ---
 
-# Confirm Compatibility and Retention Choices
+# Ask Compatibility
 
 Whether old behavior stays supported, whether old code stays in the tree, and whether old data survives are decisions about consumers and records the user may know about and you cannot see. Deleting or breaking them is often irreversible, and a request such as "migrate" or "clean up" does not say which way the user wants these decisions to go. Resolve each choice with the user before touching the affected path, then implement exactly what they decided.
 

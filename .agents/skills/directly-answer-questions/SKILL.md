@@ -1,11 +1,11 @@
 ---
-name: treat-user-questions-as-inquiries
+name: directly-answer-questions
 description: Treat every user question as a substantive inquiry and answer what is actually asked. Use this skill whenever the user asks a question during a task, especially when the wording is emphatic, repeated, challenging, or accusatory, or when the question accompanies an instruction or correction. Use it when deciding whether a question implies a change, whether an apology is warranted, or how to handle a disputed claim. Apply it even when the question looks rhetorical, and even when the user does not ask for a particular response style.
 disable-model-invocation: false
 user-invocable: true
 ---
 
-# Treat User Questions as Inquiries
+# Directly Answer Questions
 
 A question tells you the user wants something answered. The wording can also signal urgency,
 frustration, or disagreement, but that signal does not identify what to answer. Inferring an

@@ -1,11 +1,11 @@
 ---
-name: logging-responsibility-boundaries
+name: logging-control
 description: Decide where logs, exception records, stack traces, retry attempts, and business outcomes belong in a code path, and review logging for duplication, missing outcomes, and unsafe context. Use this skill whenever adding or reviewing logging, exception handling, retry or fallback logic, observability, or error reporting, and whenever one failure produces several log entries or a success log is written before the outcome is confirmed. Apply it even when the user only asks for logs to be added or says the logs are noisy, and even when no one mentions responsibility.
 disable-model-invocation: false
 user-invocable: true
 ---
 
-# Logging Responsibility Boundaries
+# Logging Control
 
 A log is evidence about an event. One event should have one primary record, written by the component that can establish what happened and owns the processing result. Repeated records for the same event obscure where the outcome was determined and make one failure look like several; missing outcome records leave the workflow's actual state unknown.
 
