@@ -1,0 +1,5 @@
+2026-10-18T06:40:12Z api-7f9c WARN stale_read key=user:1 source=staging replicas=2
+2026-10-18T06:41:03Z api-7f9c WARN stale_read key=user:1 source=staging replicas=2
+2026-10-18T06:44:51Z api-7f9c WARN stale_read key=user:2 source=staging replicas=1
+2026-10-18T06:45:20Z api-7f9c INFO invalidated prefix=user:1
+2026-10-18T06:45:21Z api-2b81 WARN stale_read key=user:1 source=staging replicas=2

@@ -1,0 +1,9 @@
+2026-10-17T22:14:03Z ERROR unhandled exception in request handler
+Traceback (most recent call last):
+  File "src/api.py", line 42, in handle
+    return serialize(payload)
+             ^^^^^^^^^^^^^^^^^
+  File "src/serialize.py", line 2, in serialize
+    return {"id": payload["user_id"], "name": payload.get("name", "")}
+                  ~~~~~~~^^^^^^^^^
+KeyError: 'user_id'

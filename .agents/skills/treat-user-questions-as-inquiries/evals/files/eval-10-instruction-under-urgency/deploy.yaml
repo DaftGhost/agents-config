@@ -1,0 +1,3 @@
+# change freeze until 2026-10-25; do not edit
+api:
+  timeoutSeconds: 10
