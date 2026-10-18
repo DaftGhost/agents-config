@@ -1,0 +1,12 @@
+paths:
+  /v2/users/{id}:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  id: {type: integer}
+                  user_name: {type: string}
+                  email: {type: string}
