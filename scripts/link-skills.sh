@@ -320,14 +320,14 @@ run_wizard() {
     exit 1
   fi
   search_dir="$(pwd -P)"
-  while [[ ! -d "${search_dir%/}/.agents/skills" ]]; do
+  while [[ ! -d "${search_dir%/}/skills" ]]; do
     if [[ "$search_dir" == / ]]; then
-      printf 'No .agents/skills directory found in the current directory or its ancestors: %s\n' "$(pwd -P)" >&2
+      printf 'No skills directory found in the current directory or its ancestors: %s\n' "$(pwd -P)" >&2
       exit 1
     fi
     search_dir="$(dirname -- "$search_dir")"
   done
-  source_dir="${search_dir%/}/.agents/skills"
+  source_dir="${search_dir%/}/skills"
   for source in "$source_dir"/*; do
     [[ -d "$source" && -f "$source/SKILL.md" ]] || continue
     skills+=("${source##*/}")

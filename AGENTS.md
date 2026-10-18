@@ -6,11 +6,11 @@ This project authors instructions for agents: behavioral rules, skills, workflow
 
 ## Project Structure & Module Organization
 
-`.agents/` holds the base prompt heading and shared skills; `aside/` holds canonical optional instruction modules. Other agent directories contain agent-specific content and adaptations. Update the relevant shared source before referencing or adapting it for an agent.
+`.agents/` holds the base prompt heading; `skills/` holds shared skills; `aside/` holds canonical optional instruction modules. Other agent directories contain agent-specific content and adaptations. Update the relevant shared source before referencing or adapting it for an agent.
 
 - `.agents/AGENTS.md` provides the base heading always included by the prompt generator.
-- `.agents/skills/<skill-name>/` holds `SKILL.md` entry points and references.
-- `.claude/skills/` provides relative symlinks to shared skills.
+- `skills/<skill-name>/` holds `SKILL.md` entry points and references.
+- `.skill-lock.json` records the upstream source of each skill.
 - `.claude/rules/` holds Claude-specific rules with YAML `paths` frontmatter.
 - `.codex/` contains Codex-specific configuration and adaptations.
 
