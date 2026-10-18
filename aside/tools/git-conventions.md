@@ -19,7 +19,7 @@ Complete branch selection when the target and development branches are identifie
 
 ### Prepare Each Commit
 
-Inspect the staged changes and confirm that they belong to one task. Exclude unrelated files and unauthorized working-tree changes.
+Inspect the staged changes and confirm that they belong to one task. Exclude unrelated files and unauthorized working-tree changes. For a change that touches many files, review it with `git diff --cached --stat` or counts by status, and print individual paths only for the files you need to inspect.
 
 Write the commit message from the staged diff, and verify each factual claim in it against the diff before committing.
 
@@ -31,7 +31,7 @@ Write the commit message from the staged diff, and verify each factual claim in 
 **Body**: required for code commits, except pure formatting changes or single-file spelling corrections. Include these items when they apply:
 
 - The reason for the change, and the main areas changed, including the affected modules or features. For renames, list `old -> new`, with each new name's purpose when its meaning is not obvious.
-- The validation commands actually run and their results, including test and failure counts or build results where applicable. Do not report unrun checks as passing.
+- The validation commands actually run and their results, including test and failure counts or build results where applicable. Run every check that the environment allows before writing this list. Write "not run" only for a check that cannot run there, with the reason. Do not report unrun checks as passing.
 - Breaking changes: what stops working and what consumers must update.
 - What did not change, when that helps review.
 
