@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Lints shell scripts under scripts/ at warning severity. Skipped unless a .sh file is staged.
+set -uo pipefail
+
+if [[ -z "$(git diff --cached --name-only --diff-filter=ACMR -- '*.sh')" ]]; then
+  exit 0
+fi
+
+shellcheck --severity=warning scripts/*.sh

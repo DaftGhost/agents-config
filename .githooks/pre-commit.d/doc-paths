@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Checks that paths quoted in README.md and AGENTS.md exist.
+# A quoted path is checked when its first segment exists at the root, so
+# "coding/…" (a generator selection key relative to aside/) is skipped.
+set -uo pipefail
+
+status=0
+for doc in README.md AGENTS.md; do
+  while IFS= read -r path; do
+    first="${path%%/*}"
+    [[ -e "$first" ]] || continue
+    if [[ ! -e "$path" ]]; then
+      printf 'Missing path quoted in %s: %s\n' "$doc" "$path" >&2
+      status=1
+    fi
+  done < <(grep -oE '`[^`]+/[^`]*`' "$doc" | tr -d '`' | grep -vE '[~<*]|XXXX|://' | sort -u)
+done
+
+exit "$status"
