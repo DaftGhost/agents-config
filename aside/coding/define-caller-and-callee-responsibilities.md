@@ -18,7 +18,7 @@ An unexplained division of work leaves callers guessing about prerequisites, dup
 
 4. **Verify both sides.** Check that each affected caller fulfills its obligations and handles the declared outcomes, and that the callee delivers its guarantees under those conditions. Check success and failure paths for duplicated decisions, missing work, and conflicting ownership. Use focused tests where behavior requires verification. Finish when the inspected paths agree with the contract and any verification gaps are explicit.
 
-For input-validation assignments, apply [Input Contract Validation Trust Boundaries](input-contract-validation-trust-boundaries.md). For logging assignments, apply [Logging Responsibility Boundaries](logging-responsibility-boundaries.md).
+For input-validation assignments, apply [Input Contract Validation Trust Boundaries](input-contract-validation-trust-boundaries.md). For logging assignments, use the `logging-responsibility-boundaries` skill.
 
 Complete the design or review when the caller's obligations, the callee's guarantees, and the reasons for their division are explicit and supported by the affected call paths. Resolve any missing context needed to assign a responsibility before implementing that part.
 
