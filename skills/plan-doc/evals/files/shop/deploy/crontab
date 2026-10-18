@@ -1,0 +1,3 @@
+# 业务定时任务（最小间隔 5 分钟，由运维统一发布）
+*/5 * * * * cd /srv/shop && python -m shop.jobs.sync_prices
+0 3 * * * cd /srv/shop && python -m shop.jobs.cleanup_sessions

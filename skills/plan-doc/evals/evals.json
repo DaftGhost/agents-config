@@ -1,0 +1,215 @@
+{
+  "skill_name": "plan-doc",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "single-small-change",
+      "prompt": "给 recordtool 的 export 命令加一个 --since YYYY-MM-DD 参数，只导出 created_at 在该日期（含当天）之后的记录。改动不大，帮我出个改动方案文档，先不要改代码。",
+      "expected_output": "Investigate first, pick the single tier on its own judgment, write docs/plans/<topic>/plan.md following the single-document template (five sections, one acceptance-criteria set), keep all decisions in the document, and reply with a pointer only.",
+      "files": [
+        "evals/files/recordtool/"
+      ],
+      "expectations": [
+        "Investigation precedes writing: in steps.log every READ of a project file precedes the first WRITE of a plan document.",
+        "Exactly one document, docs/plans/<topic>/plan.md, is created; no requirements or design file exists.",
+        "The document begins with a status line (Draft or Confirmed, or the equivalent in the document's language).",
+        "A tier line near the top names the tier with a one-line reason, and the tier matches the structure of the documents written.",
+        "The document has these sections in order (or their equivalents in the document's language): Goal and scope, Requirements, Plan, Verification, Decisions.",
+        "The document has no Impact, Constraints and feasibility, Data and interface changes, Rollout and rollback, or Incidental changes section, and does not read as a requirements document followed by a design document.",
+        "Requirements are a table of ID, requirement, and acceptance criterion; IDs are unique and sequential (R1, R2, ...).",
+        "Every acceptance criterion is a concrete input-to-expected-result check, not a vague statement such as 'works correctly'.",
+        "The requirements, including the background section, name no internal function, class, table, or column and prescribe no mechanism (scheduler, queue, cache, schema); current behavior is described in observable terms and user-facing interface names from the request are allowed.",
+        "Plan rows each name a touchpoint, the change, and the requirement IDs they serve; every requirement ID is served by at least one row; touchpoints exist in the project or are marked new.",
+        "Verification maps test cases to requirement IDs, so every acceptance criterion has a test case.",
+        "Decisions the request leaves open are in a Decisions section; each has a question, options, a recommended default, and an empty field for the user's decision, and requirements that depend on one are marked pending that question (or the section says there are none).",
+        "The final reply contains no open questions or pending decisions; it names the document(s), points the user to the Decisions section to review and answer, and states what happens next.",
+        "Only files under docs/plans/<topic>/ are created or edited; README and other project documentation are untouched, and the documents plan no documentation upkeep the user did not request.",
+        "The document is lean: about 100 lines or fewer.",
+        "The document is written in the same language as the user's request.",
+        "No project source or test file is created or modified; only plan documents are written.",
+        "Loading check (steps.log): the agent read SKILL.md and the single-document reference and did not read the requirements, design, or revising references."
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "dual-requirements-phase",
+      "prompt": "把库存扣减从下单时改成支付成功后，未支付订单超时自动关闭。涉及订单、库存、支付回调几块，帮我出个修改方案文档。",
+      "expected_output": "After investigating, choose the dual tier on its own judgment, write only requirements.md (status Draft, tier line, background, scope, requirement table with acceptance criteria, impact, constraints and feasibility, Decisions), keep all open items in the document, and reply with a pointer only.",
+      "files": [
+        "evals/files/shop/"
+      ],
+      "expectations": [
+        "Investigation precedes writing: in steps.log every READ of a project file precedes the first WRITE of a plan document.",
+        "Exactly one document, docs/plans/<topic>/requirements.md, is created; no design.md and no design content (touchpoints, test plan, rollout) exists in any file.",
+        "The document begins with a status line (Draft or Confirmed, or the equivalent in the document's language).",
+        "A tier line near the top names the tier with a one-line reason, and the tier matches the structure of the documents written.",
+        "The document has these sections (or their equivalents in the document's language): Background and goal, Scope, Requirements, Impact, Constraints and feasibility, Decisions.",
+        "Background and goal describes how the project behaves today, consistent with the code.",
+        "Requirements are a table of ID, requirement, and acceptance criterion; IDs are unique and sequential (R1, R2, ...).",
+        "Every acceptance criterion is observable from the requirement's point of view (behavior or data outcome), checkable without reading the code.",
+        "Every acceptance criterion is a concrete input-to-expected-result check, not a vague statement such as 'works correctly'.",
+        "The requirements, including the background section, name no internal function, class, table, or column and prescribe no mechanism (scheduler, queue, cache, schema); current behavior is described in observable terms and user-facing interface names from the request are allowed.",
+        "Constraints and feasibility lists the constraints found in the project (such as README, deploy, and config notes), and each is paired with how the requirements respect it.",
+        "Decisions the request leaves open are in a Decisions section; each has a question, options, a recommended default, and an empty field for the user's decision, and requirements that depend on one are marked pending that question (or the section says there are none).",
+        "The final reply contains no open questions or pending decisions; it names the document(s), points the user to the Decisions section to review and answer, and states what happens next.",
+        "Only files under docs/plans/<topic>/ are created or edited; README and other project documentation are untouched, and the documents plan no documentation upkeep the user did not request.",
+        "No project source or test file is created or modified; only plan documents are written.",
+        "Loading check (steps.log): the agent read SKILL.md and the requirements reference and did not read the single-document, design, or revising references."
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "dual-design-phase",
+      "prompt": "需求文档我确认过了（docs/plans/stock-after-payment/requirements.md），接着写详细设计吧。",
+      "expected_output": "Mark requirements.md Confirmed (only the status line changes), then write design.md with approach, touchpoints citing requirement IDs, data and interface changes, edge cases, implementation acceptance criteria covering every requirement, rollout and rollback, a separate Incidental changes section, and Decisions; reply with a pointer only.",
+      "files": [
+        "evals/files/shop/",
+        "evals/files/shop-requirements-draft/"
+      ],
+      "expectations": [
+        "requirements.md differs from its original only in the status line, which now says Confirmed (or the equivalent in the document's language).",
+        "design.md is created in docs/plans/stock-after-payment/ with a Draft status line.",
+        "design.md has these sections (or their equivalents in the document's language): Approach, Changes by touchpoint, Data and interface changes, Edge cases and failure handling, Implementation acceptance criteria, Rollout and rollback, Incidental changes, Decisions.",
+        "Each touchpoint row names a file or function, the change, and the requirement IDs it serves; the file or function exists in the project or is marked new.",
+        "Every requirement ID appears in at least one touchpoint row and at least one implementation acceptance criterion.",
+        "Implementation acceptance criteria are a table of ID, criterion, covered requirement IDs, and how to check; each criterion is verifiable from the implementation side (a test, a check, an inspectable property) rather than a restatement of the requirement's behavior.",
+        "Edge cases and failure handling name concrete scenarios tied to the touchpoints (for example duplicate delivery, partial failure, other callers of changed code), not generic boilerplate.",
+        "Every change that no requirement asks for (for example fixing an existing defect found along the way) is listed in the Incidental changes section with its impact; touchpoint rows list only what the requirements need. The section says None if there are none.",
+        "No requirement is relaxed, dropped, or extended by the design.",
+        "The Decisions section is a table with a question, options, a recommended default, and an empty decision column for each row (or says None).",
+        "Situations the confirmed requirements leave uncovered but the design must handle (for example a late event, or records that already exist when the change ships) are Decisions rows with a recommended default; requirements.md is not extended to cover them.",
+        "The final reply contains no open questions or pending decisions; it names the document(s), points the user to the Decisions section to review and answer, and states what happens next.",
+        "Only files under docs/plans/<topic>/ are created or edited; README and other project documentation are untouched, and the documents plan no documentation upkeep the user did not request.",
+        "No project source or test file is created or modified; only plan documents are written.",
+        "Loading check (steps.log): the agent read SKILL.md and the design reference and did not read the single-document, requirements, or revising references."
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "vague-request-ask-first",
+      "prompt": "给 recordtool 加上权限控制，出个方案文档。",
+      "expected_output": "After a brief look at the project, the request is still too underspecified to decide scope or tier: ask a few blocking questions first with options and recommended defaults, write no document.",
+      "files": [
+        "evals/files/recordtool/"
+      ],
+      "expectations": [
+        "Investigation precedes writing: in steps.log the agent READs project files before asking.",
+        "No plan document (plan.md, requirements.md, or design.md) is created in this turn.",
+        "The agent asks before writing: it uses an interactive question tool when one is available, otherwise a short numbered message; it asks at most four questions, each with options and a recommended default.",
+        "The questions are ones whose answers decide what the change is or which tier fits, not details that could sit in a Decisions section.",
+        "The response cites at least one fact found in the project to show why the request is underspecified.",
+        "No project source or test file is created or modified; only plan documents are written.",
+        "Loading check (steps.log): the agent read SKILL.md only and did not read any reference file."
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "user-picks-single-doc",
+      "prompt": "把库存扣减从下单时改成支付成功后，未支付订单超时自动关闭。涉及面比较广，但我只想要一个文档，别拆成两份。",
+      "expected_output": "The user's explicit single-document choice wins: one plan.md following the single-document template (not a concatenation of the dual documents), all open items in its Decisions section, reply with a pointer only.",
+      "files": [
+        "evals/files/shop/"
+      ],
+      "expectations": [
+        "Investigation precedes writing: in steps.log every READ of a project file precedes the first WRITE of a plan document.",
+        "Exactly one document, docs/plans/<topic>/plan.md, is created; no requirements or design file exists.",
+        "The document begins with a status line (Draft or Confirmed, or the equivalent in the document's language).",
+        "A tier line near the top says single and that the user chose it.",
+        "The document has these sections in order (or their equivalents in the document's language): Goal and scope, Requirements, Plan, Verification, Decisions.",
+        "The document has no Impact, Constraints and feasibility, Data and interface changes, Rollout and rollback, or Incidental changes section, and does not read as two documents joined together.",
+        "Requirements are a table of ID, requirement, and acceptance criterion; IDs are unique and sequential (R1, R2, ...).",
+        "Every acceptance criterion is a concrete input-to-expected-result check, not a vague statement such as 'works correctly'.",
+        "The requirements, including the background section, name no internal function, class, table, or column and prescribe no mechanism (scheduler, queue, cache, schema); current behavior is described in observable terms and user-facing interface names from the request are allowed.",
+        "Plan rows each name a touchpoint, the change, and the requirement IDs they serve; every requirement ID is served; any change that no requirement asks for is marked incidental.",
+        "Verification maps test cases to requirement IDs, so every acceptance criterion has a test case.",
+        "Decisions the request leaves open are in a Decisions section; each has a question, options, a recommended default, and an empty field for the user's decision, and requirements that depend on one are marked pending that question (or the section says there are none).",
+        "The final reply contains no open questions or pending decisions; it names the document(s), points the user to the Decisions section to review and answer, and states what happens next.",
+        "Only files under docs/plans/<topic>/ are created or edited; README and other project documentation are untouched, and the documents plan no documentation upkeep the user did not request.",
+        "No project source or test file is created or modified; only plan documents are written.",
+        "Loading check (steps.log): the agent read SKILL.md and the single-document reference and did not read the requirements, design, or revising references."
+      ]
+    },
+    {
+      "id": 6,
+      "eval_name": "revise-feasibility-conflict-ask-first",
+      "prompt": "看了需求草稿，改几点：超时改成 15 分钟；R3 改成库存不足时自动退款，不要人工退款；R5 删掉，取消的事不管了。改完我再确认。",
+      "expected_output": "The requested R3 change conflicts with a project constraint (refund API not integrated) and deleting R5 leaves a hazard; ask first about the feasibility issue, with options and a recommended default, and leave R3 and R5 in the document unchanged until answered.",
+      "files": [
+        "evals/files/shop/",
+        "evals/files/shop-requirements-draft/"
+      ],
+      "expectations": [
+        "Before editing, the agent traces the requested changes against the project's code and constraints (steps.log shows READs of project files before any WRITE).",
+        "The agent asks before writing: it uses an interactive question tool when one is available, otherwise a short numbered message; it asks at most four questions, each with options and a recommended default.",
+        "The question names the core issue that affects feasibility and explains the conflict with a fact found in the project.",
+        "In requirements.md, R3 and R5 are unchanged from the original draft after this turn; edits that raise no conflict (such as the timeout) may be applied or deferred.",
+        "No second requirements file or renamed copy is created, and no design.md is created.",
+        "No project source or test file is created or modified; only plan documents are written.",
+        "Loading check (steps.log): the agent read SKILL.md and the revising reference and did not read the design reference."
+      ]
+    },
+    {
+      "id": 7,
+      "eval_name": "new-project",
+      "prompt": "我要新建一个命令行笔记工具 notekeeper：本地保存笔记，支持添加笔记、按标签搜索、导出为 markdown。用 Python 标准库实现，不要第三方依赖。先把需求和设计文档出一下。",
+      "expected_output": "Greenfield project: no invented current behavior, all touchpoints marked new with a proposed layout, the stdlib-only constraint carried into requirements and design, tier chosen after looking at the (empty) project, documents under docs/plans/notekeeper-like topic, decisions in the document.",
+      "files": [
+        "evals/files/empty/"
+      ],
+      "expectations": [
+        "The agent inspects the working directory before writing (steps.log shows a READ or listing of the project directory before any WRITE).",
+        "All documents are under docs/plans/<topic>/ and match one tier's structure: either a single plan.md with the single-document sections, or requirements.md only for the first phase of the dual tier.",
+        "The document begins with a status line (Draft or Confirmed, or the equivalent in the document's language).",
+        "A tier line near the top names the tier with a one-line reason, and the tier matches the structure of the documents written.",
+        "The document states that this is a new project and describes no existing behavior.",
+        "Requirements are a table of ID, requirement, and acceptance criterion; IDs are unique and sequential (R1, R2, ...).",
+        "Every acceptance criterion is a concrete input-to-expected-result check, not a vague statement such as 'works correctly'.",
+        "The requirements, including the background section, name no internal function, class, table, or column and prescribe no mechanism (scheduler, queue, cache, schema); current behavior is described in observable terms and user-facing interface names from the request are allowed.",
+        "The standard-library-only constraint appears as a constraint in the document and no third-party dependency is introduced.",
+        "Any touchpoint in a plan or design is marked new, and a plan or design.md proposes the file layout; a requirements.md-only output satisfies this by containing no touchpoints.",
+        "Requirements cover add, search by tag, and markdown export, each with at least one acceptance criterion.",
+        "Decisions the request leaves open are in a Decisions section; each has a question, options, a recommended default, and an empty field for the user's decision, and requirements that depend on one are marked pending that question (or the section says there are none).",
+        "The final reply contains no open questions or pending decisions; it names the document(s), points the user to the Decisions section to review and answer, and states what happens next.",
+        "Only files under docs/plans/<topic>/ are created or edited; README and other project documentation are untouched, and the documents plan no documentation upkeep the user did not request.",
+        "No source, test, or configuration file is created; only plan documents are written."
+      ]
+    },
+    {
+      "id": 8,
+      "eval_name": "revise-no-conflict",
+      "prompt": "看了需求草稿，改一点：超时从 30 分钟改成 15 分钟，其他不变。改完我再确认。",
+      "expected_output": "A conflict-free revision: edit requirements.md in place, propagate the change to every mention, keep the Draft status and stable IDs, leave other lines untouched, ask nothing, reply with a pointer and a summary of the change.",
+      "files": [
+        "evals/files/shop/",
+        "evals/files/shop-requirements-draft/"
+      ],
+      "expectations": [
+        "requirements.md is edited in place; no renamed copy and no second requirements file is created.",
+        "The timeout reads 15 minutes everywhere it appeared (background, the R4 requirement, and its acceptance criterion), and the allowed closing delay in R4 is kept consistent with the 5-minute scheduling constraint.",
+        "Lines unrelated to the timeout are unchanged from the original draft.",
+        "The status line stays Draft and no requirement is renumbered.",
+        "The agent asks no question before or after editing.",
+        "The reply gives a short summary of what changed, names the document, and asks the user to review and confirm; it contains no open questions.",
+        "No design.md is created.",
+        "No project source or test file is created or modified; only plan documents are written.",
+        "Loading check (steps.log): the agent read SKILL.md and the revising reference and did not read the design reference."
+      ]
+    },
+    {
+      "id": 9,
+      "eval_name": "request-contradiction-ask-first",
+      "prompt": "我想把库存扣减从下单时改成支付成功后，未支付订单超时自动关闭并释放库存。涉及订单、库存、支付回调几块，帮我出个修改方案文档。",
+      "expected_output": "The request contradicts itself once stock is deducted only after payment (an unpaid order holds no stock to release). This changes what the change means, so ask first with options and a recommended default, and write no document.",
+      "files": [
+        "evals/files/shop/"
+      ],
+      "expectations": [
+        "The agent READs the project files before asking.",
+        "No plan document (plan.md, requirements.md, or design.md) is created in this turn.",
+        "The agent asks before writing: it uses an interactive question tool when one is available, otherwise a short numbered message; it asks at most four questions, each with options and a recommended default.",
+        "The question identifies that under deduction-after-payment an unpaid order holds no stock, so 'release stock on timeout' has nothing to release for new orders, and offers resolving interpretations as options.",
+        "No project source or test file is created or modified; only plan documents are written."
+      ]
+    }
+  ]
+}

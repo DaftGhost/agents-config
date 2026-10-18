@@ -1,49 +1,49 @@
 ---
 name: plan-doc
-description: 编写、修改或审查需求与技术方案文档，明确产品问题、目标、范围、验收标准、技术设计与验证要求，为评审和实施提供依据。
-argument-hint: "需求梳理 | 方案设计 | PRD | TDD | 文档审查"
-user-invocable: true
-allowed-tools:
-  - Read
-  - Grep
-  - Glob
-  - Write
-  - Edit
-  - AskUserQuestion
+description: Turn a development task into plan documents before any code is written - requirements (what to do, with acceptance criteria) and detailed design (how to do it) - as one document for contained work or two sequential documents for larger work. Works for modifying or maintaining an existing project and for starting a new one. Use this skill whenever the user asks for a plan, 方案, 需求文档, 详细设计, design doc, spec, or "figure out what and how first" for a feature, refactor, migration, fix, or new project, even if they only say "出个方案" and name no tier. Do not use it to implement the change, to write README or API reference docs, or to answer a quick question.
 ---
 
-# 任务规划文档
+# Plan Doc
 
-## 总体工作流
+Tasks go wrong when "what" and "how" are decided together: the design quietly settles product questions, and the requirements inherit whatever the code happens to allow. A plan document separates them. Requirements state what must be true when the task is done; the design states how to get there. Write plan documents only; leave project source untouched.
 
-按以下步骤推进。各步骤及分支流程复用已有来源、调查结果和结论；仅补查新增缺口，或在新证据使原结论失效时重新核实受影响部分。完成条件只覆盖本次任务范围。判断或变更文档状态、批准边界或暂缓安排前，读取 [文档状态与批准条件](reference/document-status.md)。
+## Workflow
 
-### 1. 调查现状并界定任务
+1. **Investigate first.** Read what exists: the code the task touches, README, deploy and config files, ops notes. For a new project, inspect the working directory and the user's stated stack. Test the request against itself: once every part is done, does each part still mean something? A part that becomes empty or impossible (such as releasing what is no longer held) is a contradiction. Then look for conflicts between the request and what the project allows. Constraints that bind a design often live outside the code.
+2. **Resolve blockers before writing.** A blocker is a question whose different answers lead to different documents: a contradiction in the request, a conflict that makes the request infeasible as stated, or an ambiguity that changes what the task is or which tier fits. If a recommended default would leave the document sound (a time limit, a policy for an edge case, what to do about money already taken), it is a Decisions row, not a blocker. Ask with the interactive question tool (such as AskUserQuestion) when you have one, otherwise a short numbered message: at most four questions, each with options and a recommended default. Write nothing until they are answered. Everything that can wait belongs in the document's Decisions section.
+3. **Choose the tier yourself, after investigating.** An explicit tier request from the user wins. Otherwise:
+   - **Single**: the work is contained (one module or one new small component), leaves no scope-changing decision open, and is easy to revert.
+   - **Dual**: the work spans modules, alters persisted data or a public interface, or needs the requirements settled before design starts.
 
-从用户描述涉及的问题入手，阅读仓库指引和已有资料，查明问题场景、当前行为与预期结果；涉及技术设计时，查证相关实现及调用、契约与依赖影响。已有文档同时核对版本、需求来源与批准依据。依据调查结果和用户约束，明确创建、修改或审查，以及需求或技术设计阶段，界定任务范围与交付边界。局部任务沿受影响内容调查。先明确产品问题和预期结果，再研究实现。
+   Ask only when you cannot tell. Record the tier and the reason in the tier line.
+4. **Write the documents** as the tier section below directs.
 
-**完成条件**：动作、阶段、交付范围和可用基线明确；问题、现状及影响均有来源或缺口记录，事实与推断可区分。文档量级留待缺口处理后判断。仅请求口头建议、任务拆分或直接改代码时，不主动创建规划文档；规划工作的修改范围限于文档，其他修改须有用户另行授权。
+## Document Rules
 
-### 2. 处理缺口与决策
+- **Location**: `docs/plans/<topic>/` with a short kebab-case topic. Single: `plan.md`. Dual: `requirements.md`, then `design.md`.
+- **Task scope**: these documents serve this task. Leave README and other project documentation alone, and plan no documentation upkeep unless the request asks for it.
+- **Header**: title, `Status: Draft` (or `Confirmed`), and `Tier: <single|dual> - <reason>`.
+- **Language**: follow the user's request.
+- **Requirements table**: columns ID, requirement, acceptance criterion. IDs (R1, R2, ...) are unique, and a removed ID is never reused. An acceptance criterion is a concrete input-to-result check. Everything in the requirements part, today's-behavior description included, is written in observable terms: no function, class, table, or file names, and no mechanisms (scheduler, cron, queue, schema). Constraints appear as outcomes ("closes within 5 minutes of the limit"). Names and mechanisms belong to the plan or design.
+- **Touchpoints**: each is a file or function you opened, or is marked new. Each cites the requirement IDs it serves.
+- **Decisions section**: a table of ID (Q1, ...), question, options, recommended default, and a blank decision column for the user. A requirement that depends on a question is marked "pending Qn"; its criterion is written for the recommended default. Write "None" when empty.
+- **Communication happens in the document.** Open decisions, assumptions, and impacts live in the document so the user reviews one place. The reply names the files, states the tier in a line, says what to review, and says what happens next. It neither lists nor paraphrases Decisions rows ("review the Decisions section" is enough), and it carries no open questions; blockers were settled before writing.
 
-已有答案直接沿用；客观事实缺失返回第 1 步补查，无法核实则标为待核实；需要选择目标、规则或取舍的才列为待决策。两者并存时注明事实缺口对选择的影响，不影响当前决策的信息留占位。仅当未决选择会改变目标、范围、验收或设计时，读取 [提问细则](reference/questions.md)；信息充分时直接继续。
+## Single Tier
 
-**完成条件**：核心需求都有可观察的验收条件或关联的未决事项，缺口的影响与阻塞环节明确。仍有会改变量级的未知时保持量级待定，继续补查或澄清，并推进不依赖该结论的工作；当前无法继续时，在第 3 步记录已知内容与缺口，按草稿或审查发现处理。
+Read [references/single.md](references/single.md) and write `plan.md` in one pass.
 
-### 3. 形成文档或审查发现
+## Dual Tier
 
-读取 [交付物与资料选择](reference/document-scope.md)，确定目标路径、文档量级和当前分支；起草时直接创建目标文件，修改时直接更新受影响内容及关联位置，审查按 [审查流程](reference/review.md) 整理发现。量级仍待定时，先在已有文档或草稿中记录已知内容与缺口；无可写工作区时在回复中提供 Markdown。
+**Phase 1 - requirements.** Read [references/requirements.md](references/requirements.md) and write `requirements.md` as Draft. Stop there: the reply points to the Decisions section and says the design follows the user's confirmation. Finish the investigation here, because a conflict first found during design forces the requirements to be reopened.
 
-**完成条件**：文档已写入目标文件或回复，或已整理审查发现，覆盖本次范围并记录未决项。经第 4 步复核后，交付文档位置或审查发现及依据，说明当前状态、未决项及影响、阻塞环节和未执行的验证；无未决项时写“无”。新证据改变问题、范围、依赖或影响时，仅返回第 1、2 步处理受影响部分，再调整量级、内容与引用。
+**Phase 2 - design.** Start when the user confirms the requirements. Change the status line of `requirements.md` to Confirmed and nothing else, read [references/design.md](references/design.md), and write `design.md` as Draft. If the design shows a requirement cannot be met as written, treat it as a blocker: ask first, then revise per the revising reference.
 
-### 4. 复核一致性与状态
+## Existing Documents
 
-按已加载的状态与批准规则逐份核对状态，并检查适用内容要求、需求—设计—验证的关联、正文与图表及决策记录的一致性。区分验证方案和实际执行结果，文档完成或获批不代表实现、测试或发布完成。
+When documents for this task already exist, resume at the phase they indicate. When the user gives feedback on a document or changes a requirement, read [references/revising.md](references/revising.md) before editing.
 
-**完成条件**：适用要求均已核对，状态与证据相符。事实缺口回第 1 步补查，待决策项回第 2 步，内容遗漏或冲突回第 3 步；当前无法补齐的注明影响。审查仅报告发现，改写另按修改任务处理。
+## Done
 
-## 证据与决策
-
-- 结论注明来源；代码结论定位到文件、符号或接口。区分事实、假设、建议和决定，推断及未核实信息标明状态；未知日期、负责人、指标和资源保留待确认。
-- 需求使用稳定编号，注明来源、确认状态和可观察的验收条件。状态为“已确认”“待用户确认”或“待核实”。可基于证据提出完整的推荐主方案，正文、图表与追踪表统一标为“建议／待评审”；只有用户明确确认的结论才转为已确认决定，并回填关联内容及决策记录；修改历史决定时新增记录，保留原记录并标明替代关系。
-- 分开记录待用户决策、事实核验与已确认决定；已接受风险单列。未决项注明影响、阻塞环节、依据及后续安排（责任人、时点或触发条件；未知则标明）。
+- The document or documents sit at the location above with status, tier, and the sections their reference lists.
+- No project file other than the plan documents changed.
