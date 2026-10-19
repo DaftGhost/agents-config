@@ -247,7 +247,7 @@ select_items() {
 link_skill() {
   local source="$1" target="$2" destination relative_source choice backup=''
   destination="$(dirname -- "$target")"
-  relative_source="$(realpath -m --relative-to="$destination" -- "$(dirname -- "$source")")/${source##*/}" || return 1
+  relative_source="$("$REALPATH_BIN" -m --relative-to="$destination" -- "$(dirname -- "$source")")/${source##*/}" || return 1
   LINK_RESULT=existing
   if [[ -L "$target" && "$target" -ef "$source" && "$(readlink -- "$target")" != /* ]]; then
     return 0
@@ -315,8 +315,16 @@ run_wizard() {
     printf 'Run this wizard in an interactive terminal.\n' >&2
     exit 1
   fi
-  if ! command -v realpath >/dev/null 2>&1 || ! realpath -m --relative-to=/ -- / >/dev/null 2>&1; then
+  REALPATH_BIN=''
+  for candidate in realpath grealpath; do
+    if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -m --relative-to=/ -- / >/dev/null 2>&1; then
+      REALPATH_BIN="$candidate"
+      break
+    fi
+  done
+  if [[ -z "$REALPATH_BIN" ]]; then
     printf 'This wizard requires realpath with -m and --relative-to support (GNU coreutils).\n' >&2
+    printf 'Install it with: brew install coreutils\n' >&2
     exit 1
   fi
   search_dir="$(pwd -P)"
@@ -365,7 +373,7 @@ run_wizard() {
     for name in "${selected_skills[@]}"; do
       source="$source_dir/$name"
       target="$destination/$name"
-      relative_source="$(realpath -m --relative-to="$destination" -- "$(dirname -- "$source")")/${source##*/}"
+      relative_source="$("$REALPATH_BIN" -m --relative-to="$destination" -- "$(dirname -- "$source")")/${source##*/}"
       if [[ -L "$target" && "$target" -ef "$source" && "$(readlink -- "$target")" != /* ]]; then
         note "Already linked with a relative path: $target"
       elif [[ -e "$target" || -L "$target" ]]; then
