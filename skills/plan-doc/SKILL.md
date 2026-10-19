@@ -16,7 +16,7 @@ Tasks go wrong when "what" and "how" are decided together: the design quietly se
    - **Dual**: the work spans modules, alters persisted data or a public interface, or needs the requirements settled before design starts.
 
    Ask only when you cannot tell. Record the tier and the reason in the tier line.
-4. **Write the documents** as the tier section below directs.
+4. **Write the document for the current phase** as the tier section below directs. Single is one document; dual is one document per phase, and only the first phase runs unless the user has already confirmed the requirements.
 
 ## Document Rules
 
@@ -35,9 +35,9 @@ Read [references/single.md](references/single.md) and write `plan.md` in one pas
 
 ## Dual Tier
 
-**Phase 1 - requirements.** Read [references/requirements.md](references/requirements.md) and write `requirements.md` as Draft. Stop there: the reply points to the Decisions section and says the design follows the user's confirmation. Finish the investigation here, because a conflict first found during design forces the requirements to be reopened.
+**Phase 1 - requirements.** Read [references/requirements.md](references/requirements.md) and write `requirements.md` as Draft. Stop there, even when the user names the dual tier or asks for both documents in one message: the design is written against requirements the user has confirmed, and review often changes them, so a design written alongside is rework. The reply points to the Decisions section and says the design follows the user's confirmation. Finish the investigation here, because a conflict first found during design forces the requirements to be reopened.
 
-**Phase 2 - design.** Start when the user confirms the requirements. Change the status line of `requirements.md` to Confirmed and nothing else, read [references/design.md](references/design.md), and write `design.md` as Draft. If the design shows a requirement cannot be met as written, treat it as a blocker: ask first, then revise per the revising reference.
+**Phase 2 - design.** Start when the user confirms the requirements. The conversation that produced `requirements.md` may be gone, and the code may have changed since, so the document and the project as they are now are the only inputs. Change the status line of `requirements.md` to Confirmed and nothing else, read [references/design.md](references/design.md), investigate the code as it directs, and write `design.md` as Draft. If the design shows a requirement cannot be met as written, treat it as a blocker: ask first, then revise per the revising reference.
 
 ## Existing Documents
 
@@ -45,5 +45,5 @@ When documents for this task already exist, resume at the phase they indicate. W
 
 ## Done
 
-- The document or documents sit at the location above with status, tier, and the sections their reference lists.
+- The document for the current phase sits at the location above with status, tier, and the sections its reference lists. In the dual tier a finished first phase leaves `requirements.md` alone in the folder.
 - No project file other than the plan documents changed.

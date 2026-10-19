@@ -1,0 +1,3 @@
+DB_PATH = "shop.db"
+CURRENCY = "CNY"
+PAGE_SIZE = 20
