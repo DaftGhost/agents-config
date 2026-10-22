@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Rejects staged files larger than 20 KiB (20480 bytes). Files under skills/ are exempt.
+set -uo pipefail
+
+limit=20480
+status=0
+
+while IFS= read -r -d '' path; do
+  [[ "$path" == skills/* ]] && continue
+  size="$(git cat-file -s ":$path")"
+  if (( size > limit )); then
+    printf 'Staged file exceeds %d bytes: %s (%d bytes)\n' "$limit" "$path" "$size" >&2
+    status=1
+  fi
+done < <(git diff --cached --name-only -z --diff-filter=ACMR)
+
+exit "$status"

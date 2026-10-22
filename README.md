@@ -26,4 +26,4 @@ Links use paths relative to the destination directory and reflect subsequent ski
 
 ## Checks
 
-Run `git config core.hooksPath .githooks` once per clone. Git runs `.githooks/pre-commit`, which runs each script in `.githooks/pre-commit.d/`: `shellcheck` lints `scripts/*.sh` at warning severity when a `.sh` file is staged, and `doc-paths` checks paths quoted in this file and `AGENTS.md`.
+Run `git config core.hooksPath .githooks` once per clone. Git runs `.githooks/pre-commit`, which runs each script in `.githooks/pre-commit.d/`: `shellcheck` lints `scripts/*.sh` at warning severity when a `.sh` file is staged, `doc-paths` checks paths quoted in this file and `AGENTS.md`, and `file-size` rejects staged files over 20480 bytes outside `skills/`.
