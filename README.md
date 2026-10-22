@@ -8,7 +8,7 @@ Select `coding/coding-guideline.md` to include the coding guidelines in a genera
 ./scripts/generate-agent-prompts.sh
 ```
 
-See [the complete functionality and test reference](scripts/generate-agent-prompts.md) for write modes, destinations, selection rules, section merging, write safeguards, dependencies, and standalone test case specifications.
+See [the functionality reference](scripts/generate-agent-prompts.md) for write modes, destinations, selection rules, section merging, write safeguards, and dependencies, and [the test case specifications](scripts/generate-agent-prompts-tests.md) for standalone test cases.
 
 ## Skill links
 
