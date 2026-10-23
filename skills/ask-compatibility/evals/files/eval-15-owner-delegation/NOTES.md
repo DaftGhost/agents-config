@@ -1,3 +1,0 @@
-- exports/audit_2021.csv: security audit export; retention 7 years (COMP-7).
-- exports/customers_2022.csv: contains personal data; delete when no longer needed (privacy policy).
-- config/legacy.ini: read by the on-prem installer shipped to 30 customers (installer lives in another repo).

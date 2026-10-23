@@ -1,2 +1,2 @@
-# app
-Configuration is read from `config.yaml`. Self-hosted customers maintain their own copy.
+# Self-hosted app
+Customers run this on their own servers and keep their own `config.yaml` next to the binary.
