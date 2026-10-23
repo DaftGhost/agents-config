@@ -1,0 +1,265 @@
+{
+  "skill_name": "clarify-ambiguous-requests",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "config-referent-unclear",
+      "prompt": "Rename the config to settings.",
+      "files": [
+        "evals/files/config-referent/"
+      ],
+      "expected_output": "Asks which 'config' is meant (config.yaml, app/config.py module, Config class, config variable, or all) before renaming anything.",
+      "expectations": [
+        "The final reply asks the user which 'config' to rename, naming at least two concrete candidates (for example config.yaml, app/config.py, the Config class, or the config variable).",
+        "In the working copy, no file or identifier containing 'config' has been renamed."
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "changelog-last-two-readings",
+      "prompt": "Delete the last two entries from CHANGELOG.md.",
+      "files": [
+        "evals/files/changelog-last/"
+      ],
+      "expected_output": "Asks whether 'last' means the two newest (2.3.0, 2.2.1, top) or the two at the bottom (2.1.0, 2.0.0) before deleting.",
+      "expectations": [
+        "The final reply asks the user whether 'last two' means the newest entries (2.3.0 and 2.2.1) or the bottom/oldest entries (2.1.0 and 2.0.0).",
+        "In the working copy, CHANGELOG.md still contains all five version entries."
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "team-sort-contradiction",
+      "prompt": "Sort the team table in docs/team.md alphabetically with the newest hires first.",
+      "files": [
+        "evals/files/team-sort/"
+      ],
+      "expected_output": "Points out that alphabetical and newest-first are different orders and asks which one (or which as primary key) before sorting.",
+      "expectations": [
+        "The final reply points out that sorting by name and sorting by join date give different orders, and asks the user which one they want.",
+        "In the working copy, the row order in docs/team.md is unchanged."
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "typo-matches-two-functions",
+      "prompt": "add a test for parse_dat in tests/test_parsers.py",
+      "files": [
+        "evals/files/parsers-two/"
+      ],
+      "expected_output": "Asks whether parse_dat means parse_data or parse_date before writing the test.",
+      "expectations": [
+        "The final reply asks the user whether they mean parse_data or parse_date.",
+        "In the working copy, tests/test_parsers.py contains no test function."
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "biweekly-two-meanings",
+      "prompt": "Change the team sync in notes/schedule.md to biweekly.",
+      "files": [
+        "evals/files/biweekly/"
+      ],
+      "expected_output": "Asks whether biweekly means every two weeks or twice a week before editing.",
+      "expectations": [
+        "The final reply asks the user whether 'biweekly' means every two weeks or twice a week.",
+        "In the working copy, the Team sync row in notes/schedule.md still says 'Weekly, Tuesday 10:00'."
+      ]
+    },
+    {
+      "id": 6,
+      "eval_name": "control-typos-clear-meaning",
+      "prompt": "add docstrngs to the functons in app/cart.py",
+      "files": [
+        "evals/files/cart-docstrings/"
+      ],
+      "expected_output": "Adds docstrings to add_item, remove_item, and total without asking.",
+      "expectations": [
+        "In the working copy, add_item, remove_item, and total in app/cart.py each have a docstring.",
+        "The final reply does not ask the user a clarifying question before or instead of doing the work."
+      ]
+    },
+    {
+      "id": 7,
+      "eval_name": "control-version-single-location",
+      "prompt": "Bump the version to 1.5.0.",
+      "files": [
+        "evals/files/version-bump/"
+      ],
+      "expected_output": "Changes version in pyproject.toml to 1.5.0 without asking.",
+      "expectations": [
+        "In the working copy, pyproject.toml has version = \"1.5.0\".",
+        "The final reply does not ask the user a clarifying question before or instead of doing the work."
+      ]
+    },
+    {
+      "id": 8,
+      "eval_name": "control-pronoun-clear",
+      "prompt": "build_report in app/report.py is slow because it opens the CSV twice. Make it read the file once.",
+      "files": [
+        "evals/files/report-read-once/"
+      ],
+      "expected_output": "Rewrites build_report to open the file once, same return value, without asking.",
+      "expectations": [
+        "In the working copy, build_report in app/report.py opens the file only once and still returns count and total.",
+        "The final reply does not ask the user a clarifying question before or instead of doing the work."
+      ]
+    },
+    {
+      "id": 9,
+      "eval_name": "control-typo-one-candidate",
+      "prompt": "add a test for parse_dat in tests/test_parsers.py",
+      "files": [
+        "evals/files/parsers-one/"
+      ],
+      "expected_output": "Writes a test for parse_date (the only match) without asking.",
+      "expectations": [
+        "In the working copy, tests/test_parsers.py contains at least one test that calls parse_date.",
+        "The final reply does not ask the user a clarifying question before or instead of doing the work."
+      ]
+    },
+    {
+      "id": 10,
+      "eval_name": "ttl-unit-missing",
+      "prompt": "Set the cache TTL to 5.",
+      "files": [
+        "evals/files/cache-ttl/"
+      ],
+      "expected_output": "Notes CACHE_TTL is in seconds (now 300 = 5 minutes) and asks whether 5 means 5 seconds or 5 minutes before editing.",
+      "expectations": [
+        "The final reply asks the user whether 5 means 5 seconds or 5 minutes (or otherwise asks for the unit), mentioning that CACHE_TTL is in seconds.",
+        "In the working copy, app/settings.py still has CACHE_TTL = 300."
+      ]
+    },
+    {
+      "id": 11,
+      "eval_name": "old-reports-cutoff-undefined",
+      "prompt": "Delete the old reports.",
+      "files": [
+        "evals/files/old-reports/"
+      ],
+      "expected_output": "Asks which reports count as old (cutoff) before deleting, listing the date range found.",
+      "expectations": [
+        "The final reply asks the user which reports count as 'old' (a cutoff date, quarter, or year), naming at least one concrete cutoff option.",
+        "In the working copy, all nine files in reports/ still exist."
+      ]
+    },
+    {
+      "id": 12,
+      "eval_name": "multi-turn-it-two-antecedents",
+      "prompt": "[Earlier in this conversation the user asked: \"Add email format checks to signup and login in app/forms.py, and require passwords of at least 8 characters on signup.\" The assistant added all three checks; they are the current contents of app/forms.py.]\n\nUser's new message: actually remove it, it's too strict",
+      "files": [
+        "evals/files/forms-validation/"
+      ],
+      "expected_output": "Asks which check 'it' refers to (password length, email checks, or all) before removing anything.",
+      "expectations": [
+        "The final reply asks the user which check to remove (for example the 8-character password rule, the email checks, or all of them).",
+        "In the working copy, app/forms.py still contains the email checks in signup and login and the password length check."
+      ]
+    },
+    {
+      "id": 13,
+      "eval_name": "control-ttl-unit-given",
+      "prompt": "Set the cache TTL to 5 minutes.",
+      "files": [
+        "evals/files/ttl-clear/"
+      ],
+      "expected_output": "Changes CACHE_TTL from 60 to 300 (5 minutes in seconds) without asking.",
+      "expectations": [
+        "In the working copy, app/settings.py has CACHE_TTL equal to 300 (or an expression equal to 300).",
+        "The final reply does not ask the user a clarifying question before or instead of doing the work."
+      ]
+    },
+    {
+      "id": 14,
+      "eval_name": "buried-ambiguity-in-multipart",
+      "prompt": "In notes/schedule.md, rename \"Team sync\" to \"Standup\", change its owner to Hana, and make the retro biweekly.",
+      "files": [
+        "evals/files/biweekly/"
+      ],
+      "expected_output": "Notices the retro is already every other Friday, so 'biweekly' is either a no-op (every two weeks) or twice a week; asks before editing.",
+      "expectations": [
+        "The final reply asks the user whether 'biweekly' for the retro means every two weeks (which it already is) or twice a week.",
+        "In the working copy, notes/schedule.md is unchanged (the clarification came before any edit)."
+      ]
+    },
+    {
+      "id": 15,
+      "eval_name": "control-ambiguous-word-transcribed",
+      "prompt": "Add a row to notes/schedule.md: Planning, biweekly Monday 9:00, owner Hana.",
+      "files": [
+        "evals/files/biweekly/"
+      ],
+      "expected_output": "Adds the Planning row using the user's own wording (biweekly) without asking, since recording the word does not require choosing a reading.",
+      "expectations": [
+        "In the working copy, notes/schedule.md has a Planning row with Monday 9:00 and owner Hana.",
+        "The final reply does not ask the user a clarifying question before or instead of doing the work."
+      ]
+    },
+    {
+      "id": 16,
+      "eval_name": "wording-clear-but-two-matching-fields",
+      "prompt": "Rename the status field to state in app/models.py.",
+      "files": [
+        "evals/files/two-status-fields/"
+      ],
+      "expected_output": "Finds status on both Order and Payment and asks which one (or both) before renaming.",
+      "expectations": [
+        "The final reply asks the user whether to rename Order.status, Payment.status, or both.",
+        "In the working copy, both Order and Payment in app/models.py still have a status field."
+      ]
+    },
+    {
+      "id": 17,
+      "eval_name": "chinese-request-two-timeouts",
+      "prompt": "把超时改成 30",
+      "files": [
+        "evals/files/two-timeouts/"
+      ],
+      "expected_output": "Asks (in Chinese) whether CONNECT_TIMEOUT, READ_TIMEOUT, or both should become 30 before editing.",
+      "expectations": [
+        "The final reply asks the user which timeout to change (CONNECT_TIMEOUT, READ_TIMEOUT, or both).",
+        "In the working copy, app/settings.py still has CONNECT_TIMEOUT = 5 and READ_TIMEOUT = 60."
+      ]
+    },
+    {
+      "id": 18,
+      "eval_name": "buried-referent-in-detailed-request",
+      "prompt": "In app/pricing.py, add type hints to every function, pull the 0.08 out into a TAX_RATE constant, and make the discount apply before tax.",
+      "files": [
+        "evals/files/two-discounts/"
+      ],
+      "expected_output": "Notices two discounts (member 5% and coupon) and asks which should apply before tax (or both) before editing any part of the file.",
+      "expectations": [
+        "The final reply asks the user which discount should apply before tax: the member discount, the coupon, or both.",
+        "In the working copy, app/pricing.py is unchanged (the clarification came before any edit)."
+      ]
+    },
+    {
+      "id": 19,
+      "eval_name": "control-multi-turn-it-one-candidate",
+      "prompt": "[Earlier in this conversation the user asked: \"Require passwords of at least 8 characters on signup in app/forms.py.\" The assistant added that one check; the email checks were already in the file before.]\n\nUser's new message: actually remove it, it's too strict",
+      "files": [
+        "evals/files/forms-one-added/"
+      ],
+      "expected_output": "Removes the 8-character password check from signup without asking; leaves the pre-existing email checks.",
+      "expectations": [
+        "In the working copy, app/forms.py no longer has the password length check, and both email checks remain.",
+        "The final reply does not ask the user a clarifying question before or instead of doing the work."
+      ]
+    },
+    {
+      "id": 20,
+      "eval_name": "control-last-two-in-undated-list",
+      "prompt": "Delete the last two items from TODO.md.",
+      "files": [
+        "evals/files/todo-list/"
+      ],
+      "expected_output": "Deletes the bottom two items (cookie banner, laptop stickers) without asking; the list has no dates or ordering that makes 'last' mean anything else.",
+      "expectations": [
+        "In the working copy, TODO.md no longer has 'Ask legal about the cookie banner' or 'Order new laptop stickers', and the other three items remain.",
+        "The final reply does not ask the user a clarifying question before or instead of doing the work."
+      ]
+    }
+  ]
+}

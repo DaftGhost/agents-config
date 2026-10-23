@@ -1,0 +1,22 @@
+[
+ {"query": "move the team standup in team-calendar.md to biweekly starting next week", "should_trigger": true},
+ {"query": "delete the last 3 entries from data/audit_log.csv, they're junk from my test run", "should_trigger": true},
+ {"query": "rename the config to settings everywhere in the repo pls", "should_trigger": true},
+ {"query": "actually remove it, it's way too slow", "should_trigger": true},
+ {"query": "set the cache expiry to 10", "should_trigger": true},
+ {"query": "Sort the leaderboard table in docs/leaderboard.md alphabetically, highest score first.", "should_trigger": true},
+ {"query": "add a test for parse_dat in tests/test_parsers.py", "should_trigger": true},
+ {"query": "clean out the old builds from dist/, the folder is like 4GB now", "should_trigger": true},
+ {"query": "把那个接口的超时改一下，改成 30", "should_trigger": true},
+ {"query": "In billing.py, add type hints, pull 0.2 into a VAT constant, and make the discount apply before tax (we have the loyalty discount and the promo code one).", "should_trigger": true},
+ {"query": "Add pagination to the GET /orders endpoint in app/api.py.", "should_trigger": false},
+ {"query": "Write a short announcement of our Q3 results from notes/q3.md and save it as announcement.md", "should_trigger": false},
+ {"query": "quick q: does biweekly mean every two weeks or twice a week? my manager used it and I'm not sure", "should_trigger": false},
+ {"query": "fix the typos in README.md, dont change anything else", "should_trigger": false},
+ {"query": "Set CACHE_TTL in app/settings.py to 300 seconds.", "should_trigger": false},
+ {"query": "rename get_user to fetch_user in lib/users.py and drop the old name, nobody outside this repo uses it", "should_trigger": false},
+ {"query": "translate 'the biweekly sync is moved to Thursday' into Japanese for our Tokyo team", "should_trigger": false},
+ {"query": "test_checkout keeps failing with KeyError: 'amount' since yesterday's merge, can you figure out why", "should_trigger": false},
+ {"query": "grill me on my plan to move all our cron jobs onto a Redis queue", "should_trigger": false},
+ {"query": "delete reports/sales-2024-q3.md and reports/sales-2024-q4.md, we archived them in drive", "should_trigger": false}
+]
