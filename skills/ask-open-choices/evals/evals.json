@@ -1,0 +1,118 @@
+{
+  "skill_name": "ask-open-choices",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "pagination-strategy-open",
+      "prompt": "Add pagination to the GET /orders endpoint in app/api.py.",
+      "files": [
+        "evals/files/orders-api/"
+      ],
+      "expectations": [
+        "The final reply asks the user to choose the pagination style (for example offset/page-number versus cursor) instead of announcing one already built.",
+        "The final reply gives a recommended option and at least one alternative.",
+        "In the working copy, list_orders in app/api.py has not been changed to one pagination scheme."
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "dedupe-which-record-wins",
+      "prompt": "Write dedupe_customers() in app/customers.py that removes duplicate customers by email.",
+      "files": [
+        "evals/files/dedupe-customers/"
+      ],
+      "expectations": [
+        "The final reply asks the user which duplicate record to keep (for example oldest, most recently updated, or merged fields).",
+        "The final reply gives a recommended option and at least one alternative.",
+        "In the working copy, app/customers.py contains no dedupe_customers that silently commits to one keep rule."
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "delete-hard-or-soft",
+      "prompt": "Add a DELETE /orders/<id> endpoint to app/api.py.",
+      "files": [
+        "evals/files/orders-api/"
+      ],
+      "expectations": [
+        "The final reply asks the user whether the delete should remove the order (hard delete) or keep it with a status (soft delete), with a recommendation.",
+        "In the working copy, app/api.py has no DELETE route that commits to hard or soft delete."
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "user-already-chose",
+      "prompt": "Add cursor-based pagination to GET /orders in app/api.py: use the order id as the cursor (?cursor=<last id seen>), return 50 orders per page, and change the response to {\"orders\": [...], \"next_cursor\": <last id or null>}. No clients depend on the current shape.",
+      "files": [
+        "evals/files/orders-api/"
+      ],
+      "expectations": [
+        "The final reply does not ask the user to choose a pagination style, page size, or response shape.",
+        "In the working copy, list_orders implements id-based cursor pagination with a page size of 50 and returns orders plus next_cursor."
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "delegated-choice",
+      "prompt": "Add caching to get_exchange_rate in app/rates.py. Pick whatever approach you think is best.",
+      "files": [
+        "evals/files/rates-cache/"
+      ],
+      "expectations": [
+        "The final reply does not ask the user to choose a caching approach before implementing.",
+        "In the working copy, get_exchange_rate has caching.",
+        "The final reply names the caching approach chosen and at least one alternative the user could switch to."
+      ]
+    },
+    {
+      "id": 6,
+      "eval_name": "vague-clean-up",
+      "prompt": "Clean up customer names when they are loaded in app/customers.py.",
+      "files": [
+        "evals/files/dedupe-customers/"
+      ],
+      "expectations": [
+        "The final reply asks the user what the name cleanup should include (for example trimming whitespace, collapsing spaces, or changing capitalization).",
+        "The final reply gives a recommended option and at least one alternative.",
+        "In the working copy, load_customers does not change name capitalization."
+      ]
+    },
+    {
+      "id": 7,
+      "eval_name": "refactor-behavior-fixed",
+      "prompt": "In app/api.py, make get_order and cancel_order share one helper for finding an order by id. Don't change behavior.",
+      "files": [
+        "evals/files/orders-api/"
+      ],
+      "expectations": [
+        "The final reply asks the user no question about how to implement the change.",
+        "In the working copy, get_order and cancel_order both call one shared lookup helper and still return 404 for an unknown id."
+      ]
+    },
+    {
+      "id": 8,
+      "eval_name": "announcement-audience-open",
+      "prompt": "Write a short announcement of our Q3 results from notes/q3.md. Save it as announcement.md.",
+      "files": [
+        "evals/files/q3-notes/"
+      ],
+      "expectations": [
+        "The final reply asks the user who the announcement is for (for example internal staff versus customers or the public), or which sensitive items (churn, outage, hiring freeze) to include, before writing the announcement.",
+        "The final reply gives a recommended option and at least one alternative.",
+        "In the working copy, announcement.md does not exist."
+      ]
+    },
+    {
+      "id": 9,
+      "eval_name": "proofread-settled",
+      "prompt": "Fix the typos and grammar in docs/onboarding.md. Keep the wording otherwise.",
+      "files": [
+        "evals/files/onboarding-doc/"
+      ],
+      "expectations": [
+        "The final reply asks the user no question about how to do the edit.",
+        "In the working copy, docs/onboarding.md fixes 'you laptop', 'you're team', 'scheduel', 'overveiw', and 'a on-call', and keeps the other wording."
+      ]
+    }
+  ]
+}
