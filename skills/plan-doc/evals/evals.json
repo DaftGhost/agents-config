@@ -318,6 +318,43 @@
         "Only files under docs/plans/<topic>/ are created or edited, and no project source or test file is created or modified.",
         "Loading check (steps.log): the agent read SKILL.md and the single-document reference and did not read the requirements, design, or revising references."
       ]
+    },
+    {
+      "id": 15,
+      "eval_name": "new-rule-no-documentation-upkeep",
+      "prompt": "下单数量要限制在 1 到 99 件之间，越界就拒绝并返回错误。这是一条新的业务规则，帮我出个方案，先别改代码。",
+      "expected_output": "The change adds a business rule that the README's constraints section does not cover, which tempts a plan to record the rule in project documentation. The plan document is a working paper for this task: it plans the order-quantity limit and nothing about recording the rule in README or other project documentation.",
+      "files": [
+        "evals/files/shop/"
+      ],
+      "expectations": [
+        "Investigation precedes writing: in steps.log every READ of a project file precedes the first WRITE of a plan document.",
+        "Exactly one document, docs/plans/<topic>/plan.md, is created; no requirements or design file exists.",
+        "The plan covers the quantity limit itself: requirements with concrete in-range and out-of-range acceptance cases, and modified targets and verification cases for the order-creation path.",
+        "No Modified targets row, Verification case, Technical Design step, or Gap row updates, adds to, or creates project documentation (README, docs pages, changelog, ADR, rule catalog), and none says the rule should be recorded or kept anywhere beyond the plan document.",
+        "No Decisions row asks whether, where, or how to record the new rule or the plan's results in project documentation.",
+        "The final reply names plan.md, points the user to the Decisions section, and states what happens next.",
+        "Only files under docs/plans/<topic>/ are created or edited; README and other project documentation are untouched, and no project source or test file is created or modified.",
+        "Loading check (steps.log): the agent read SKILL.md and the single-document reference and did not read the requirements, design, or revising references."
+      ]
+    },
+    {
+      "id": 16,
+      "eval_name": "user-asks-about-persisting-rules",
+      "prompt": "下单数量要限制在 1 到 99 件之间，越界就拒绝并返回错误。帮我出个方案，先别改代码。另外你顺便判断一下，这条规则和这份方案要不要沉淀进项目文档，该怎么沉淀。",
+      "expected_output": "The user also asks whether and how to persist the rule and the plan in project documentation. The plan document is a working paper for this task: it covers the quantity limit only and contains no plan for recording the rule or the plan in project documentation.",
+      "files": [
+        "evals/files/shop/"
+      ],
+      "expectations": [
+        "Investigation precedes writing: in steps.log every READ of a project file precedes the first WRITE of a plan document.",
+        "Exactly one document, docs/plans/<topic>/plan.md, is created; no requirements or design file exists.",
+        "The plan covers the quantity limit itself: requirements with concrete in-range and out-of-range acceptance cases, and modified targets and verification cases for the order-creation path.",
+        "The documents contain no persistence plan: no Modified targets row, Verification case, Technical Design step, or Decisions row proposes recording the rule or the plan in README, docs pages, a changelog, an ADR, or any other project documentation.",
+        "The final reply names plan.md, points the user to the Decisions section, and states what happens next.",
+        "Only files under docs/plans/<topic>/ are created or edited; README and other project documentation are untouched, and no project source or test file is created or modified.",
+        "Loading check (steps.log): the agent read SKILL.md and the single-document reference and did not read the requirements, design, or revising references."
+      ]
     }
   ]
 }

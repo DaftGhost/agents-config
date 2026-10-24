@@ -21,7 +21,7 @@ Tasks go wrong when "what" and "how" are decided together: the design quietly se
 ## Document Rules
 
 - **Location**: `docs/plans/<topic>/` with a short kebab-case topic. Single: `plan.md`. Dual: `requirements.md`, then `design.md`.
-- **Task scope**: these documents serve this task. Leave README and other project documentation alone, and plan no documentation upkeep unless the request asks for it.
+- **Task scope**: these documents are working papers for this task: they sort out the current requirement and guide its implementation, and they are not project documentation meant to outlast it. Leave README and other project documentation alone, and plan no documentation upkeep unless the request asks for it.
 - **Header**: title, `Status: Draft` (or `Confirmed`), and `Tier: <single|dual> - <reason>`.
 - **Language**: follow the user's request.
 - **Requirements table**: columns ID, requirement, acceptance criterion. IDs (R1, R2, ...) are unique, and a removed ID is never reused. An acceptance criterion is a concrete input-to-result check.
