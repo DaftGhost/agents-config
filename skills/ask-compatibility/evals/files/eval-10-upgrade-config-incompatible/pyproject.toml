@@ -1,0 +1,4 @@
+[project]
+name = "edge-proxy"
+version = "0.3.0"
+dependencies = ["tinyserve==1.4.0"]
