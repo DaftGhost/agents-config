@@ -1,0 +1,82 @@
+[
+  {
+    "query": "my ~/.bashrc still has the old opencode 1.x PATH lines and a few stale aliases under them, remove all of that",
+    "should_trigger": true
+  },
+  {
+    "query": "convert /etc/nginx/conf.d/site.conf to the new upstream block syntax from the 1.25 migration guide, just edit it in place",
+    "should_trigger": true
+  },
+  {
+    "query": "i upgraded alacritty to 0.13 and ~/.config/alacritty/alacritty.yml isn't read anymore. rewrite it in the new toml format",
+    "should_trigger": true
+  },
+  {
+    "query": "postgres went from 14 to 16 on this box and a bunch of params in postgresql.conf were removed, fix the file so it starts again",
+    "should_trigger": true
+  },
+  {
+    "query": "reformat data/contacts.csv in place so phones are E.164 and drop the old 'tel' column, nothing else uses it as far as i know",
+    "should_trigger": true
+  },
+  {
+    "query": "vscode settings.json has a lot of deprecated copilot keys after the update, move them to the new key names and delete the old ones",
+    "should_trigger": true
+  },
+  {
+    "query": "clean up ~/.ssh/config, there are a ton of old hosts from my last job in there",
+    "should_trigger": true
+  },
+  {
+    "query": "strip the oh-my-zsh stuff out of ~/.zshrc, i switched to starship last week",
+    "should_trigger": true
+  },
+  {
+    "query": "we moved to docker compose v2, so docker-compose.yml still has version: '3' and links: everywhere. modernize it",
+    "should_trigger": true
+  },
+  {
+    "query": "the CLI renamed --out to --output in v3, update scripts/deploy.sh and the Makefile and get rid of the old flag",
+    "should_trigger": true
+  },
+  {
+    "query": "back up my ~/Documents folder to the external drive mounted at /mnt/usb with rsync, incremental so it's fast",
+    "should_trigger": false
+  },
+  {
+    "query": "restore ~/.bashrc from yesterday's backup, i broke my PATH",
+    "should_trigger": true
+  },
+  {
+    "query": "add a cron job that dumps the postgres db to S3 every night at 2am",
+    "should_trigger": false
+  },
+  {
+    "query": "add an alias gs='git status' to my ~/.zshrc",
+    "should_trigger": false
+  },
+  {
+    "query": "what does a .bak file normally contain and when should you make one before editing a config",
+    "should_trigger": false
+  },
+  {
+    "query": "write a script that rotates the backups in /var/backups and keeps only the last 7",
+    "should_trigger": false
+  },
+  {
+    "query": "show me the diff between config.yaml and config.yaml.bak",
+    "should_trigger": false
+  },
+  {
+    "query": "add a retries key with default 3 to config.yaml under the http section",
+    "should_trigger": false
+  },
+  {
+    "query": "fix the typo 'recieve' in README.md",
+    "should_trigger": false
+  },
+  {
+    "query": "install the latest ripgrep with dnf and tell me the version",
+    "should_trigger": false
+  }
+]

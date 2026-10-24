@@ -1,6 +1,6 @@
 ---
 name: ask-compatibility
-description: 'Use when a task would retire something old (an old name, API field, config format, CLI flag, package, code path, or stored data) through a rename, replacement, migration, or removal. Ask the user whether to keep supporting it or keep a backup of it, including when they left it "up to you" or said "clean up" or "migrate", and when project notes seem to answer it.'
+description: 'Use when a task drops or replaces something that already exists (remove, strip, clean up, convert, migrate, upgrade, rename, overwrite): a config or dotfile like ~/.bashrc or postgresql.conf, a data file, a CLI flag, a name, an API field, a package. Invoke it before the first edit, rm, mv, cp, or sed, even for a quick one-file change. It settles whether the old form stays supported and whether to keep a backup copy; never decide that yourself or make a .bak on your own. Do not use it when the task only adds something (a new alias, key, or file), fixes a typo, or only reads or explains.'
 disable-model-invocation: false
 user-invocable: true
 ---
