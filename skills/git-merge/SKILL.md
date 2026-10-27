@@ -20,7 +20,7 @@ Use this workflow to integrate reviewed changes from a source branch into a targ
 1. Identify the source branch and target branch from the user's request and repository state. Confirm the intended direction of integration.
 2. Check the current branch and working tree before starting. Preserve unrelated changes and keep them out of the integration.
 3. Complete the required review of a feature branch before integrating it.
-4. Unless the user or repository instructions specify another method, switch to the target branch and run `git merge --squash <source-branch>`. Follow an explicit request for a regular merge, retained merge commit, or other integration method.
+4. Unless the user or repository instructions specify another method, record the source branch's full tip commit SHA with `git rev-parse <source-branch>^{commit}`, switch to the target branch, and run `git merge --squash <recorded-sha>`. Follow an explicit request for a regular merge, retained merge commit, or other integration method.
 
 **Complete preparation** when the source, target, integration method, and review status are clear, and the integration operation has started from the target branch.
 
@@ -50,15 +50,17 @@ A squash merge prepares changes but does not create a commit automatically. Befo
 
 1. Inspect `git diff --cached`, `git diff --cached --check`, and the staged file list with `git diff --cached --name-only`.
 2. Confirm that the staged changes are limited to the reviewed integration scope and consider the relevant validation results.
-3. Create one integration commit on the target branch, appending `(squash from <source-branch>)` to its subject.
+3. Create one integration commit on the target branch, appending `(squash from <source-branch>)` to its subject and recording `Source commit: <full-sha>` in its body using the SHA captured before the merge.
 4. Verify that the target branch contains the integrated changes and that the integration operation has completed.
 
 For a regular merge or another integration method, verify that the operation completed and the target branch contains the intended changes.
 
-Example squash commit subject for source branch `codex/fliggy-order`:
+Example squash commit for source branch `codex/fliggy-order`:
 
 ```text
 feat(channelcore): add a Fliggy order adapter (squash from codex/fliggy-order)
+
+Source commit: 0123456789abcdef0123456789abcdef01234567
 ```
 
 **Complete integration** when the operation has finished and its result matches the reviewed integration scope. Preparing squash changes without creating the resulting commit does not complete integration.
