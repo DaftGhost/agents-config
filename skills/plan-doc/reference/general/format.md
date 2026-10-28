@@ -10,7 +10,7 @@ Write these sections in order after the header:
 2. **Applicable constraints**: constraints relevant to the task.
 3. **Detailed design**: the key logic, flow, execution steps and inspected or new targets, linked to requirement IDs.
 4. **Expected outcomes**: the expected results or state changes for each requirement ID.
-5. **Verification approach**: how to check the expected outcomes, mapped to requirement IDs.
+5. **Verification approach**: how to check the expected outcomes and applicable constraints.
 6. **Decisions**: follow [Plan Decisions](../decisions.md).
 
-Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements; map requirements that necessitate a change to inspected or new targets.
+Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to inspected or new targets.

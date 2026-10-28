@@ -10,5 +10,5 @@ Write these sections in order after the header:
 2. **Current context and constraints**: relevant current behavior, dependencies and constraints with sources, including behavior the capability must coexist with.
 3. **Functional requirements**: follow [Requirements](../requirements.md).
 4. **Implementation design**: the flow and affected entry points, components, interfaces and data; for a new project, describe the proposed layout. List inspected or new targets with their requirement IDs.
-5. **Acceptance criteria and verification**: concrete input-to-result criteria and checks mapped to requirement IDs.
+5. **Acceptance criteria and verification**: concrete input-to-result criteria and checks mapped to requirement IDs or applicable constraints.
 6. **Decisions**: follow [Plan Decisions](../decisions.md).

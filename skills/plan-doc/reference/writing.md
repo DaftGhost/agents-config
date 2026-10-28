@@ -5,6 +5,7 @@ Apply these rules together with the selected type's format. Write for both the p
 ## Human understanding
 
 - Make each document self-contained for its phase: state the goal, scope, essential context and constraints, explaining task-specific terms and assumptions. In dual, the design may link to the confirmed requirements, but summarize the essential context needed to understand its approach.
+- Write requirements as the outcomes or behaviors the task must deliver. Put limits the work must respect under constraints, including prohibitions and behaviors or contracts that must remain unchanged; put excluded work under scope. Do not rephrase these as requirements. Verify applicable constraints separately from requirements.
 - Organize requirements from the overall outcome to areas or flows and then to concrete requirements and relevant conditions. For a complex document, add a brief key-points overview before the detailed sections.
 - Use Mermaid diagrams where a flow, relationship or state change is easier to understand visually. Each diagram should explain one meaningful part with enough context and relationships to be useful; if it covers too much to follow, split it by area or level and connect the parts in the text. Prefer prose or a table when a diagram would add little. Place each diagram beside the explanation it supports.
 

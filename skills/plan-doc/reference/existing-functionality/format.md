@@ -12,5 +12,5 @@ Write these sections in order after the header:
 4. **Scope of change**: affected behavior, effects of the required change on users or consumers, and in-scope and out-of-scope changes.
 5. **Change implementation approach**: describe the proposed changes against the current flows, requirements and constraints. List inspected or new targets with their requirement IDs.
 6. **Impact assessment**: explain which callers, users, interfaces, existing data or other dependencies are affected, how they depend on current behavior and the consequences of the proposed changes. Link impacts to requirement IDs and mark unresolved impacts.
-7. **Acceptance criteria and regression verification**: before-and-after criteria and checks, including preserved behavior and affected paths where relevant, mapped to requirement IDs.
+7. **Acceptance criteria and regression verification**: before-and-after criteria and checks, including preserved behavior and affected paths where relevant, mapped to requirement IDs or applicable constraints.
 8. **Decisions**: follow [Plan Decisions](../decisions.md).
