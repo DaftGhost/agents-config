@@ -1,6 +1,6 @@
 ---
 name: git-merge
-description: Use when integrating one branch into another, choosing or completing a squash or regular merge, or resolving conflicts during merge, rebase, or cherry-pick. Guides review-first integration, user-confirmed conflict resolution, and verification through completion.
+description: Use when integrating one branch into another, choosing or completing a squash or regular merge, or resolving conflicts during merge, rebase, or cherry-pick. Guides integration, user-confirmed conflict resolution, and verification through completion.
 argument-hint: "[source-branch] [target-branch]"
 allowed-tools:
   - Read
@@ -13,16 +13,15 @@ allowed-tools:
 
 # Merge a branch
 
-Use this workflow to integrate reviewed changes from a source branch into a target branch. It covers the integration method, conflicts, and verification through completion.
+Use this workflow to integrate changes from a source branch into a target branch. It covers the integration method, conflicts, and verification through completion.
 
 ## Prepare the integration
 
 1. Identify the source branch and target branch from the user's request and repository state. Confirm the intended direction of integration.
 2. Check the current branch and working tree before starting. Preserve unrelated changes and keep them out of the integration.
-3. Complete the required review of a feature branch before integrating it.
-4. Unless the user or repository instructions specify another method, record the source branch's full tip commit SHA with `git rev-parse <source-branch>^{commit}`, switch to the target branch, and run `git merge --squash <recorded-sha>`. Follow an explicit request for a regular merge, retained merge commit, or other integration method.
+3. Unless the user or repository instructions specify another method, record the source branch's full tip commit SHA with `git rev-parse <source-branch>^{commit}`, switch to the target branch, and run `git merge --squash <recorded-sha>`. Follow an explicit request for a regular merge, retained merge commit, or other integration method.
 
-**Complete preparation** when the source, target, integration method, and review status are clear, and the integration operation has started from the target branch.
+**Complete preparation** when the source, target, and integration method are clear, and the integration operation has started from the target branch.
 
 ## Resolve integration conflicts
 
@@ -49,7 +48,7 @@ Use this procedure when `git merge`, `git rebase`, `git cherry-pick`, or another
 A squash merge prepares changes but does not create a commit automatically. Before completing it:
 
 1. Inspect `git diff --cached`, `git diff --cached --check`, and the staged file list with `git diff --cached --name-only`.
-2. Confirm that the staged changes are limited to the reviewed integration scope and consider the relevant validation results.
+2. Confirm that the staged changes are limited to the intended integration scope and consider the relevant validation results.
 3. Create one integration commit on the target branch, appending `(squash from <source-branch>)` to its subject and recording `Source commit: <full-sha>` in its body using the SHA captured before the merge.
 4. Verify that the target branch contains the integrated changes and that the integration operation has completed.
 
@@ -63,4 +62,4 @@ feat(channelcore): add a Fliggy order adapter (squash from codex/fliggy-order)
 Source commit: 0123456789abcdef0123456789abcdef01234567
 ```
 
-**Complete integration** when the operation has finished and its result matches the reviewed integration scope. Preparing squash changes without creating the resulting commit does not complete integration.
+**Complete integration** when the operation has finished and its result matches the intended integration scope. Preparing squash changes without creating the resulting commit does not complete integration.
