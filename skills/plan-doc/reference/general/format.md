@@ -6,11 +6,11 @@ When this is the primary type, read [Dual Workflow](../dual.md) only if the user
 
 Write these sections in order after the header:
 
-1. **Goal and scope** *(what)*: requested outcome, in-scope and out-of-scope items, and affected consumers or resources.
-2. **Current state and constraints** *(what)*: relevant facts, dependencies and constraints with sources.
-3. **Required outcomes** *(what)*: a table of requirement IDs and required outcomes or properties.
-4. **Approach and targets** *(how)*: describe the approach and inspected or new targets, linked to requirement IDs.
-5. **Acceptance and verification** *(how and acceptance)*: observable results or inspectable properties and checks mapped to requirement IDs.
-6. **Decisions** *(what)*: use a table of ID (Q1, ...), question, options, recommended default, and a blank decision column. Mark a requirement depending on a decision `pending Qn`. Write `None` when empty.
+1. **Task objectives and scope**: what to do, the relevant starting state and scope, with requirement IDs.
+2. **Applicable constraints**: constraints relevant to the task.
+3. **Detailed design**: the key logic, flow, execution steps and inspected or new targets, linked to requirement IDs.
+4. **Expected outcomes**: the expected results or state changes for each requirement ID.
+5. **Verification approach**: how to check the expected outcomes, mapped to requirement IDs.
+6. **Decisions**: follow [Plan Decisions](../decisions.md).
 
-Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements; map requirements that necessitate a change to inspected or new targets. In dual, record any new implementation-only decisions in a Decisions section in `how-to-do.md` without copying earlier decisions.
+Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements; map requirements that necessitate a change to inspected or new targets.
