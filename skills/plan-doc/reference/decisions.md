@@ -2,7 +2,13 @@
 
 ## Format
 
-Use Decisions to resolve open questions about what to do and how to do it. Use a table with columns ID (Q1, ...), question, options, recommended default, and a blank decision column. Mark each requirement that depends on a decision `pending Qn`. Write `None` when no decisions remain.
+Use Decisions to resolve open questions about what to do and how to do it. List each pending question as a row in this Markdown table, leaving the Decision cell blank:
+
+| ID | Question | Options | Recommended default | Decision |
+| --- | --- | --- | --- | --- |
+| Q1 | ... | ... | ... | |
+
+Mark each requirement that depends on a decision `pending Qn`. Write `None` when no decisions remain.
 
 In dual, each document has a Decisions section for the what and how questions identified at its stage. Record a question once in the document where it is identified; do not copy it to the other document.
 
