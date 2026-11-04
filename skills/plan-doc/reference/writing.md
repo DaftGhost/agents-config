@@ -9,6 +9,12 @@ Apply these rules together with the selected type's format. Write for both the p
 - Organize requirements from the overall outcome to areas or flows and then to concrete requirements and relevant conditions. For a complex document, add a brief key-points overview before the detailed sections.
 - Use Mermaid diagrams where a flow, relationship or state change is easier to understand visually. Each diagram should explain one meaningful part with enough context and relationships to be useful; if it covers too much to follow, split it by area or level and connect the parts in the text. Prefer prose or a table when a diagram would add little. Place each diagram beside the explanation it supports.
 
+## Design and target files
+
+- Use implementation design sections for logic, flows, responsibilities, interfaces, data and execution order. Link requirements to the relevant design explanations; keep file-change inventories out of these sections.
+- Consolidate all files to be changed in a separate **Target files** section in the single plan or, for dual, in `how-to-do.md`. Use a table with only **File** and **Operation** columns. Each row contains a file path and one operation: **Modify**, **Delete** or **Add**, translated to the document's language (修改、删除、新增 in Chinese). Keep change details and requirement IDs in the design sections.
+- Before saving, check that every planned file change appears in Target files and that implementation design sections explain the changes without listing files to change.
+
 ## Agent execution
 
 - State the inputs or starting state, processing or actions, expected outputs or state changes, and verification for the work. Provide enough detail to identify what to inspect or change and how to check the result; distinguish confirmed facts, assumptions and pending decisions.

@@ -8,8 +8,9 @@ Write these sections in order after the header:
 
 1. **Refactoring objectives and scope**: affected components, current structural problems and desired structural properties, with requirement IDs.
 2. **Applicable constraints**: observable behavior, interfaces and contracts to preserve, other limits, affected callers and supporting sources. Name internal components when they are the subject of the refactor.
-3. **Structural design and implementation sequence**: proposed responsibilities, boundaries and order of changes; identify interface effects on callers. List inspected or new targets with their requirement IDs.
-4. **Acceptance criteria and behavior preservation verification**: inspectable structural criteria and checks demonstrating preserved behavior and contracts. Use relevant existing tests or focused checks.
-5. **Decisions**: follow [Plan Decisions](../decisions.md).
+3. **Structural design and implementation sequence**: proposed responsibilities, boundaries and order of changes, linked to requirement IDs; identify interface effects on callers.
+4. **Target files**: follow [Design and target files](../writing.md#design-and-target-files).
+5. **Acceptance criteria and behavior preservation verification**: inspectable structural criteria and checks demonstrating preserved behavior and contracts. Use relevant existing tests or focused checks.
+6. **Decisions**: follow [Plan Decisions](../decisions.md).
 
-Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to inspected or new targets.
+Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to the relevant implementation design.

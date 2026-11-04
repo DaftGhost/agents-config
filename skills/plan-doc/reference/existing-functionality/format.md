@@ -10,7 +10,8 @@ Write these sections in order after the header:
 2. **Requirements and gap analysis**: before assigning requirement IDs, apply the classification in [Writing Plan Documents](../writing.md#human-understanding). Write requirements using [Requirements](../requirements.md). For each requirement ID, pair the relevant current behavior from section 1 with the required behavior and state only the difference between them; note any requirement already met.
 3. **Applicable constraints**: describe constraints relevant to this change.
 4. **Scope of change**: affected behavior, effects of the required change on users or consumers, and in-scope and out-of-scope changes.
-5. **Change implementation approach**: describe the proposed changes against the current flows, requirements and constraints. List inspected or new targets with their requirement IDs.
-6. **Impact assessment**: explain which callers, users, interfaces, existing data or other dependencies are affected, how they depend on current behavior and the consequences of the proposed changes. Link impacts to requirement IDs and mark unresolved impacts.
-7. **Acceptance criteria and regression verification**: before-and-after criteria and checks, including preserved behavior and affected paths where relevant, mapped to requirement IDs or applicable constraints.
-8. **Decisions**: follow [Plan Decisions](../decisions.md).
+5. **Change implementation approach**: describe the proposed changes against the current flows, requirements and constraints, linked to requirement IDs.
+6. **Target files**: follow [Design and target files](../writing.md#design-and-target-files).
+7. **Impact assessment**: explain which callers, users, interfaces, existing data or other dependencies are affected, how they depend on current behavior and the consequences of the proposed changes. Link impacts to requirement IDs and mark unresolved impacts.
+8. **Acceptance criteria and regression verification**: before-and-after criteria and checks, including preserved behavior and affected paths where relevant, mapped to requirement IDs or applicable constraints.
+9. **Decisions**: follow [Plan Decisions](../decisions.md).

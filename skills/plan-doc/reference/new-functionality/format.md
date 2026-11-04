@@ -9,6 +9,7 @@ Write these sections in order after the header:
 1. **Capability objectives and scope**: users or consumers, goal, inputs, outcomes, in-scope and out-of-scope behavior.
 2. **Current context and constraints**: relevant current behavior, dependencies and constraints with sources, including behavior the capability must coexist with.
 3. **Functional requirements**: follow [Requirements](../requirements.md).
-4. **Implementation design**: the flow and affected entry points, components, interfaces and data; for a new project, describe the proposed layout. List inspected or new targets with their requirement IDs.
-5. **Acceptance criteria and verification**: concrete input-to-result criteria and checks mapped to requirement IDs or applicable constraints.
-6. **Decisions**: follow [Plan Decisions](../decisions.md).
+4. **Implementation design**: the flow and affected entry points, components, interfaces and data, linked to requirement IDs; for a new project, describe component responsibilities and relationships.
+5. **Target files**: follow [Design and target files](../writing.md#design-and-target-files).
+6. **Acceptance criteria and verification**: concrete input-to-result criteria and checks mapped to requirement IDs or applicable constraints.
+7. **Decisions**: follow [Plan Decisions](../decisions.md).
