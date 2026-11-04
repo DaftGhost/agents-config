@@ -1,15 +1,15 @@
 ---
 name: request-pkexec
-description: Request narrowly scoped operating-system privileges through pkexec for authorized Linux administration tasks. Use this skill whenever a task needs administrator or another user's privileges, such as changing protected system files, managing system services, or recovering from a confirmed OS-level permission failure, even if the user does not mention pkexec or explicitly ask for elevation. Distinguish OS privileges from sandbox or agent approval before choosing an escalation path.
+description: Request narrowly scoped operating-system privileges by directly invoking the already-permitted pkexec for authorized Linux administration tasks, without asking for separate permission to use pkexec. Use this skill whenever a task needs administrator or another user's privileges, such as changing protected system files, managing system services, or recovering from a confirmed OS-level permission failure, even if the user does not mention pkexec or explicitly ask for elevation. Distinguish OS privileges from sandbox or agent approval before choosing an escalation path.
 disable-model-invocation: false
 user-invocable: true
 ---
 
 # Request Pkexec
 
-Use `pkexec` for a necessary, task-authorized operating-system operation only when the environment permits it. Each authorization request and its execution tool call must contain exactly one direct command for one reviewed operation. Request and execute additional commands separately, inspecting each result before proceeding.
+Use the already-permitted `pkexec` to request operating-system privileges for a necessary, task-authorized operation. Invoke it directly through the execution tool; do not first ask the user to approve using `pkexec`, enable elevation, or confirm an operation already within the authorized task. The invocation itself requests privileges through Polkit. Each execution tool call must contain exactly one direct command for one reviewed operation. Execute additional commands separately, inspecting each result before proceeding.
 
-`pkexec` does not replace the environment's sandbox or agent approval mechanism. Obtain required environment approval through that mechanism; never use `pkexec` to bypass a restriction or rejection. For sandbox or agent permission recovery, follow [Request Required Permissions and Continue](../../../aside/tools/request-required-permissions-and-continue.md).
+`pkexec` does not replace the environment's sandbox or agent approval mechanism. Do not create a separate approval step merely because a command uses `pkexec`. If an explicit environment restriction requires approval, use that mechanism; never use `pkexec` to bypass a restriction or rejection. For sandbox or agent permission recovery, follow [Request Required Permissions and Continue](../../../aside/tools/request-required-permissions-and-continue.md).
 
 Administrator privileges magnify the effects of incorrect paths, arguments, and hidden operations. A single scoped command makes the requested action reviewable. `pkexec` does not validate its program's arguments, and authentication does not establish that those arguments are safe.
 
@@ -23,35 +23,35 @@ Complete this step when elevation is necessary, the operation is within the user
 
 ## 2. Prepare One Reviewable Command
 
-Use this invocation shape, resolving every placeholder before requesting authorization:
+Use this invocation shape, resolving every placeholder before invoking `pkexec`:
 
 ```text
 pkexec --user <target-user> /absolute/path/to/program <explicit-arguments>
 ```
 
 - Invoke a trusted system utility by its verified absolute path. Inspect unfamiliar executables and resolve symbolic links before elevation; do not elevate executables from a repository, download, or user-writable temporary directory.
-- Keep exactly one command in the request and execution call. Run preparation and verification in separate calls. Shell command lists, pipelines, background execution, and redirections are prohibited in the elevated request, including `;`, `&&`, `||`, `|`, `&`, and newline-separated commands.
+- Keep exactly one command in the execution call. Run preparation and verification in separate calls. Shell command lists, pipelines, background execution, and redirections are prohibited in the elevated invocation, including `;`, `&&`, `||`, `|`, `&`, and newline-separated commands.
 - Pass fixed, reviewed arguments. Prefer an argument-vector API; when a tool requires a shell string, quote literal arguments correctly. Resolve paths and target sets beforehand; exclude command substitution, backticks, process substitution, and unreviewed wildcard or variable expansion. Use `--` where the target utility supports it to separate options from operands.
 - Invoke the utility that performs the approved operation directly. Do not elevate a shell, an interactive editor, interpreter code, or a command dispatcher to run arbitrary commands. Do not package multiple operations into a script, function, Make/task target, or wrapper to present them as one command. Always supply a program: bare `pkexec` can start a shell.
 - Review the utility's actual scope, including implicit hooks, plugins, and affected resources. One executable invocation is not proof of one safe operation. Keep those effects within the disclosed task scope; exclude options that execute additional arbitrary commands.
-- Prepare file content without elevation and review its diff before requesting the privileged write. Verify source content and destination paths, including symbolic links, before execution; if they change after review, review the changed state again. Use a direct file-writing utility for the write, rather than an elevated shell or heredoc.
-- Use absolute resource paths and `pkexec`'s default working-directory and environment handling. Do not add `--keep-cwd` or restore caller-controlled environment variables through `env` to make a command work. Investigate a dependency on those settings and choose a supported invocation before requesting authorization.
+- Prepare file content without elevation and review its diff before invoking the privileged write. Verify source content and destination paths, including symbolic links, before execution; if they change after review, review the changed state again. Use a direct file-writing utility for the write, rather than an elevated shell or heredoc.
+- Use absolute resource paths and `pkexec`'s default working-directory and environment handling. Do not add `--keep-cwd` or restore caller-controlled environment variables through `env` to make a command work. Investigate a dependency on those settings and choose a supported invocation before invoking `pkexec`.
 
-Complete this step when the executable, target user, arguments, affected resources, and side effects are fixed and inspectable, and the request contains no hidden command execution.
+Complete this step when the executable, target user, arguments, affected resources, and side effects are fixed and inspectable, and the invocation contains no hidden command execution.
 
-## 3. Request Authorization and Execute
+## 3. Invoke Pkexec and Let Polkit Authorize
 
-Present the exact command, why elevation is required, and what it will change or expose. Include any material interruption, data-loss risk, or recovery limit. Request permission only for that invocation; exclude broad executable-prefix approvals or persistent access grants.
+Present the exact command, why elevation is required, and what it will change or expose. Include any material interruption, data-loss risk, or recovery limit. For an operation within the authorized task, this is an explanation, not a confirmation question: proceed to execute the reviewed invocation through the permitted tool in the same turn. Ask the user only about missing task scope or effects that exceed existing authorization, as established in step 1. Do not request broad executable-prefix approvals or persistent access grants.
 
-Let the user authenticate through the system-provided authentication interface. Never ask for, enter, store, or log an administrator password, and never pipe credentials into a process.
+Let `pkexec` request authorization through Polkit and let the user authenticate through the system-provided authentication interface when prompted. Never ask for, enter, store, or log an administrator password, and never pipe credentials into a process.
 
-Execute exactly the reviewed invocation through the permitted tool after required approval. A changed executable, target user, argument, or resource requires a new scoped request. Cached Polkit authorization or the absence of a new password prompt does not broaden approval. Do not alter Polkit rules, sudoers, executable privilege bits, or authentication settings to reduce prompts or grant later commands access.
+If the executable, target user, arguments, or resources change, review the new invocation and ensure it remains within the authorized task before invoking `pkexec` again. Cached Polkit authorization or the absence of a new password prompt does not broaden task authorization. Do not alter Polkit rules, sudoers, executable privilege bits, or authentication settings to reduce prompts or grant later commands access.
 
 Complete this step when the command has finished and its output and exit status are available, or when cancellation, denial, or an execution failure has been identified. An authorization prompt alone does not prove execution.
 
 ## 4. Verify the Result and Handle Failure
 
-Verify the intended resource state in a separate, preferably unprivileged call. A zero exit status supports command completion; it does not by itself prove a service is healthy or that a wider workflow completed. If verification also requires elevation, submit it as another single-command request.
+Verify the intended resource state in a separate, preferably unprivileged call. A zero exit status supports command completion; it does not by itself prove a service is healthy or that a wider workflow completed. If verification also requires elevation, invoke it separately through `pkexec` under the same scope and review rules.
 
 For `pkexec`, exit status `126` can indicate a dismissed authentication dialog, and `127` can indicate authorization or execution setup failure. The invoked program can also return those values: inspect diagnostics and observable state before assigning a cause or retrying.
 
@@ -61,7 +61,7 @@ Complete the operation when verification supports the intended result, or report
 
 ## Examples
 
-For a task that authorizes restarting the specific service, request only this command:
+For a task that authorizes restarting the specific service, explain that administrator privileges are needed for the restart, then invoke this command directly without asking whether `pkexec` may be used:
 
 ```bash
 pkexec --user root /usr/bin/systemctl restart example.service
