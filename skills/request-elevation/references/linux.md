@@ -12,7 +12,7 @@ Complete selection when the utility, required target account, and authentication
 
 ## Construct a pkexec Invocation
 
-Resolve all placeholders before requesting approval:
+Resolve all placeholders before execution:
 
 ```text
 pkexec --user <target-user> <program> <literal-arguments>
@@ -32,7 +32,7 @@ After completion, verify separately without elevation where permitted:
 systemctl is-active example.service
 ```
 
-`pkexec` passes program arguments without validating them. Confirm the operation's effects before approval even if Polkit grants retained authorization.
+`pkexec` passes program arguments without validating them. Review the operation's effects before execution even if Polkit grants retained authorization.
 
 ## Interpret the Result
 

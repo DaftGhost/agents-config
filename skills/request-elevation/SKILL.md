@@ -40,7 +40,7 @@ Complete this step when the executable, arguments, target identity, resources, s
 
 ## 4. Obtain Approval and Execute
 
-Present the exact invocation, elevation reason, and what it will change or expose, including material interruption, data-loss risk, or recovery limits. Obtain any required approval for that invocation through the environment's mechanism. Exclude broad executable-prefix approvals and persistent access grants.
+Present the exact invocation, elevation reason, and what it will change or expose, including material interruption, data-loss risk, or recovery limits. When the operation is already authorized and the environment permits the execution path, invoke it directly; the selected mechanism handles OS authentication. Do not add a separate confirmation to use elevation or reconfirm the authorized operation. Obtain approval through the environment's mechanism only when an explicit sandbox or agent restriction requires it. Exclude broad executable-prefix approvals and persistent access grants.
 
 Let the user authenticate directly through the system interface or an interactive terminal they control. Never request, enter, store, log, or pipe an administrator password. Cached authentication or the absence of a prompt does not expand task authorization. Do not change Polkit rules, sudoers, executable privilege bits, or authentication settings to reduce prompts or authorize later commands.
 
