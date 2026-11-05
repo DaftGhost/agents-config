@@ -7,11 +7,11 @@ When this is the primary type, read [Dual Workflow](../dual.md) only if the user
 Write these sections in order after the header:
 
 1. **Task objectives and scope**: what to do, the relevant starting state and scope, with requirement IDs.
-2. **Applicable constraints**: constraints relevant to the task.
-3. **Detailed design**: the key logic, flow and execution steps, linked to requirement IDs.
-4. **Target files**: follow [Design and target files](../writing.md#design-and-target-files).
+2. **Applicable constraints**: follow [Constraints](../constraints.md).
+3. **Detailed design**: follow [Detailed Design](../detailed-design.md).
+4. **Target files**: follow [Target files](../writing.md#target-files).
 5. **Expected outcomes**: the expected results or state changes for each requirement ID.
 6. **Verification approach**: how to check the expected outcomes and applicable constraints.
 7. **Decisions**: follow [Plan Decisions](../decisions.md).
 
-Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to the relevant implementation design.
+Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to the relevant Detailed design section.

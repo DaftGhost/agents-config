@@ -7,11 +7,11 @@ When this is the primary type, read [Dual Workflow](../dual.md) only if the user
 Write these sections in order after the header:
 
 1. **Current functionality and implementation**: for each affected flow, describe the trigger and inputs, the existing entry points, relevant processing and branches, and outputs or side effects. Identify the files and symbols responsible and cite the project sources supporting these facts. For a fix, include the reproducible trigger, actual versus expected results and any verified cause; for retirement, identify the behavior being removed. Distinguish verified facts from assumptions.
-2. **Requirements and gap analysis**: before assigning requirement IDs, apply the classification in [Writing Plan Documents](../writing.md#human-understanding). Write requirements using [Requirements](../requirements.md). For each requirement ID, pair the relevant current behavior from section 1 with the required behavior and state only the difference between them; note any requirement already met.
-3. **Applicable constraints**: describe constraints relevant to this change.
-4. **Scope of change**: affected behavior, effects of the required change on users or consumers, and in-scope and out-of-scope changes.
-5. **Change implementation approach**: describe the proposed changes against the current flows, requirements and constraints, linked to requirement IDs.
-6. **Target files**: follow [Design and target files](../writing.md#design-and-target-files).
+2. **Requirements and gap analysis**: write requirements using [Requirements](../requirements.md). For each requirement ID, pair the relevant current behavior from section 1 with the required behavior and state only the difference between them; note any requirement already met.
+3. **Applicable constraints**: follow [Constraints](../constraints.md).
+4. **Scope of change**: affected behavior, effects of the required change on users or consumers, and changes covered by the task.
+5. **Detailed design**: follow [Detailed Design](../detailed-design.md).
+6. **Target files**: follow [Target files](../writing.md#target-files).
 7. **Impact assessment**: explain which callers, users, interfaces, existing data or other dependencies are affected, how they depend on current behavior and the consequences of the proposed changes. Link impacts to requirement IDs and mark unresolved impacts.
 8. **Acceptance criteria and regression verification**: before-and-after criteria and checks, including preserved behavior and affected paths where relevant, mapped to requirement IDs or applicable constraints.
 9. **Decisions**: follow [Plan Decisions](../decisions.md).

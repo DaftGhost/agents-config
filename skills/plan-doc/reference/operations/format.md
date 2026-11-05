@@ -5,10 +5,11 @@
 Write these sections in order after the header:
 
 1. **Operational objectives and scope**: environment, desired state, affected services or operators, and requirement IDs.
-2. **Current operational state and prerequisites**: inspected resources, dependencies, constraints and sources, plus conditions required before execution.
-3. **Execution and recovery plan**: configuration or infrastructure changes and their order, linked to requirement IDs. Include rollout and appropriate recovery or rollback steps.
-4. **Target files**: follow [Design and target files](../writing.md#design-and-target-files).
-5. **Acceptance criteria and operational verification**: observable states and practical checks for the change and recovery where applicable. Use commands or inspections supported by the environment; automated tests are not mandatory when operational checks suffice.
-6. **Decisions**: follow [Plan Decisions](../decisions.md).
+2. **Current operational state and prerequisites**: inspected resources, dependencies and sources, plus conditions required before execution.
+3. **Applicable constraints**: follow [Constraints](../constraints.md).
+4. **Detailed design**: follow [Detailed Design](../detailed-design.md).
+5. **Target files**: follow [Target files](../writing.md#target-files).
+6. **Acceptance criteria and operational verification**: observable states and practical checks for the change and recovery where applicable. Use commands or inspections supported by the environment; automated tests are not mandatory when operational checks suffice.
+7. **Decisions**: follow [Plan Decisions](../decisions.md).
 
-Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to the relevant implementation design.
+Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to the relevant Detailed design section.
