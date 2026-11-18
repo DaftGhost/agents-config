@@ -1,6 +1,6 @@
 ## Operations and Delivery Document
 
-**Purpose**: define an operational or delivery change and how to carry it out and verify it. As the primary type, it always uses one document; as a secondary type, it follows the primary type's organization.
+**Purpose**: define an operational or delivery change and how to carry it out and verify it.
 
 Write these sections in order after the header:
 

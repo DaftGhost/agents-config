@@ -2,8 +2,6 @@
 
 **Purpose**: define a change, fix or retirement of existing behavior and verify its effects.
 
-When this is the primary type, read [Dual Workflow](../dual.md) only if the user requests dual, or if no tier was specified and the requirements need confirmation before design or are too extensive to review alongside it. Otherwise use single. A secondary type follows the primary type's organization.
-
 Write these sections in order after the header:
 
 1. **Current functionality and implementation**: for each affected flow, describe the trigger and inputs, the existing entry points, relevant processing and branches, and outputs or side effects. Identify the files and symbols responsible and cite the project sources supporting these facts. For a fix, include the reproducible trigger, actual versus expected results and any verified cause; for retirement, identify the behavior being removed. Distinguish verified facts from assumptions.

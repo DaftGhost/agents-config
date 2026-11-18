@@ -2,8 +2,6 @@
 
 **Purpose**: define a new capability and how to implement and verify it. For a new project, describe the absence of an implementation rather than inventing current behavior.
 
-When this is the primary type, read [Dual Workflow](../dual.md) only if the user requests dual, or if no tier was specified and the requirements need confirmation before design or are too extensive to review alongside it. Otherwise use single. A secondary type follows the primary type's organization.
-
 Write these sections in order after the header:
 
 1. **Capability objectives and scope**: users or consumers, goal, inputs, outcomes and behavior covered by the task.

@@ -1,6 +1,6 @@
 # Constraints
 
-Use an **Applicable constraints** section (约束 in Chinese) for every document type. Place it in the single plan or, for dual, in `what-to-do.md`; the Detailed design in `how-to-do.md` must respect these constraints.
+Use an **Applicable constraints** section (约束 in Chinese) for every document type.
 
 ## Classification
 

@@ -1,6 +1,6 @@
 # Detailed Design
 
-Use a **Detailed design** section (详细设计 in Chinese) for every document type. Place it in the single plan or, for dual, in `how-to-do.md`; keep `what-to-do.md` focused on requirements and constraints.
+Use a **Detailed design** section (详细设计 in Chinese) for every document type.
 
 ## Design content
 

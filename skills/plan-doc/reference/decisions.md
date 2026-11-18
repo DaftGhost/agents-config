@@ -10,8 +10,6 @@ Use Decisions to resolve open questions about what to do and how to do it. List 
 
 Mark each requirement that depends on a decision `pending Qn`. Write `None` when no decisions remain.
 
-In dual, each document has a Decisions section for the what and how questions identified at its stage. Record a question once in the document where it is identified; do not copy it to the other document.
-
 ## When a decision is confirmed
 
 1. Identify the user's confirmed choice. Leave unanswered decisions pending; confirmation of a document alone does not select a decision's default.

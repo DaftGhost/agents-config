@@ -2,8 +2,6 @@
 
 **Purpose**: define a structural improvement and verify that existing behavior and contracts remain unchanged.
 
-When this is the primary type, read [Dual Workflow](../dual.md) only if the user requests dual, or if no tier was specified and the requirements need confirmation before design or are too extensive to review alongside it. Otherwise use single. A secondary type follows the primary type's organization.
-
 Write these sections in order after the header:
 
 1. **Refactoring objectives and scope**: affected components, current structural problems and desired structural properties, with requirement IDs.
