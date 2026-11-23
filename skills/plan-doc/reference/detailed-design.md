@@ -4,17 +4,21 @@ Use a **Detailed design** section (详细设计 in Chinese) for every document t
 
 ## Design content
 
-- Explain the proposed logic, flows, component responsibilities and boundaries, data and execution order. Link requirements to the relevant design explanations and show how the design respects applicable constraints. Keep file-change inventories in the separate Target files section.
-- Apply the relevant type-specific focus; combine these in one Detailed design section for mixed tasks:
-  - **New functionality**: describe the flow and affected entry points, components and data; for a new project, explain component responsibilities and relationships.
-  - **Existing functionality change**: describe proposed changes against the current flows, requirements and constraints.
-  - **Code refactoring**: describe proposed responsibilities, boundaries and order of changes, including interface effects on callers while preserving required behavior and contracts.
-  - **Operations and delivery**: describe configuration or infrastructure changes and their order, including rollout and appropriate recovery or rollback steps.
-  - **General**: describe the key logic, flow and execution steps.
+Explain how the proposed approach achieves the required outcomes and respects applicable constraints. Derive the design topics from the task's behavior, project evidence and unresolved implementation questions, using [Content development](writing.md#content-development).
+
+Use the selected types' questions to begin investigation, then follow what the task reveals:
+
+- **New functionality**: how does the capability fit the existing system, or what responsibilities and relationships does a new project need?
+- **Existing functionality change**: where must current behavior change, and how do those changes produce the required behavior?
+- **Code refactoring**: how do the proposed responsibilities and boundaries solve the structural problem while preserving behavior and caller contracts?
+- **Operations and delivery**: what execution order and prerequisites reach the desired state, and what recovery is needed if execution fails?
+- **General**: how do the proposed actions lead from the starting state to the required outcome?
+
+Combine relevant questions for mixed tasks in one Detailed design section.
 
 ## Interface design
 
 - Include a separate **Interface design** subsection (接口设计 in Chinese) within Detailed design. Cover interfaces introduced, changed or needed to understand the planned behavior, including internal component boundaries where relevant. If no interfaces apply, retain the subsection and state why it is not applicable.
-- Define each interface's **contract**: purpose, caller and provider responsibilities, operation or signature, concrete input and output types, field meanings and constraints, preconditions, postconditions, and failure outcomes. Identify contracts that remain unchanged and specify any changes and their effects on callers.
-- Define each interface's **behavior**: what valid inputs cause, relevant branches and boundary cases, observable outputs, state changes or side effects, and how callers handle failure outcomes. Specify ordering, idempotency or retry semantics when the planned flow depends on them. Give concrete input-to-result examples where prose alone leaves the behavior ambiguous.
+- Make each covered interface's **contract** clear enough to identify a valid call and the provider's guarantees: its purpose, operation or signature, concrete input and output types with field meanings and constraints, and failure outcomes. Explain caller and provider responsibilities, preconditions and postconditions where needed to establish those guarantees. Reference unchanged contracts; specify changes and their effects on callers.
+- Explain each covered interface's **behavior** so a reader can determine the observable result of relevant inputs and how callers handle failure outcomes. Follow the flow to discover which branches, boundary cases, state changes or side effects need explanation; define ordering, idempotency or retries when behavior depends on them.
 - Before saving, check that each interface's contract and behavior agree with the surrounding flow and link to acceptance or verification checks for its success and failure outcomes.

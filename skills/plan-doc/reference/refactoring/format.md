@@ -10,5 +10,3 @@ Write these sections in order after the header:
 4. **Target files**: follow [Target files](../writing.md#target-files).
 5. **Acceptance criteria and behavior preservation verification**: inspectable structural criteria and checks demonstrating preserved behavior and contracts. Use relevant existing tests or focused checks.
 6. **Decisions**: follow [Plan Decisions](../decisions.md).
-
-Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to the relevant Detailed design section.

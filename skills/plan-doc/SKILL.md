@@ -20,6 +20,7 @@ Create task-specific plan documents; do not implement the planned change.
 
 ## Document Rules
 
+- **Sections**: formats define required sections and their relative order; their content prompts are starting points for investigation, not an exhaustive outline. Include every required section in the plan, keep the required section names as headings and develop task-specific content using [Writing Plan Documents](reference/writing.md).
 - **Location**: `docs/plans/<topic>/plan.md` with a short kebab-case topic.
 - **Scope**: plan documents are working documents for the task, not persistent project documentation.
 - **Header**: title, `Status: Draft` (or `Confirmed`), `Type: <document type>`, and `Tier: single - <reason>`.
@@ -28,4 +29,4 @@ Create task-specific plan documents; do not implement the planned change.
 
 ## Done
 
-The plan has the header and sections required by its selected type.
+Complete the plan only when its required header and sections are present, its blockers are resolved, and all applicable before-saving checks in the selected format and loaded references pass. Leave nonblocking open questions recorded using Plan Decisions.

@@ -11,5 +11,3 @@ Write these sections in order after the header:
 5. **Expected outcomes**: the expected results or state changes for each requirement ID.
 6. **Verification approach**: how to check the expected outcomes and applicable constraints.
 7. **Decisions**: follow [Plan Decisions](../decisions.md).
-
-Use stable requirement IDs (R1, R2, ...); never reuse a removed ID. Link acceptance criteria and verification checks to their requirements or applicable constraints; map requirements that necessitate a change to the relevant Detailed design section.
