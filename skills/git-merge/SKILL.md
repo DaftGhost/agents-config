@@ -55,7 +55,8 @@ A squash merge prepares changes but does not create a commit automatically. Befo
 1. Inspect `git diff --cached`, `git diff --cached --check`, and the staged file list with `git diff --cached --name-only`.
 2. Confirm that the staged changes are limited to the intended integration scope and consider the relevant validation results.
 3. Create one integration commit on the target branch, appending `(squash from <source-branch>)` to its subject and recording `Source commit: <full-sha>` in its body using the SHA captured before the merge.
-4. Verify that the target branch contains the integrated changes and that the integration operation has completed.
+4. Ask the user once whether to sync the source branch with `git merge <source-branch>`. On confirmation, run it and verify that the merge completed. This records the source branch as merged so later merges and branch tooling do not integrate it again.
+5. Verify that the target branch contains the integrated changes and that the integration operation has completed.
 
 For a regular merge or another integration method, verify that the operation completed and the target branch contains the intended changes.
 
