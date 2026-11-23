@@ -19,7 +19,12 @@ Use this workflow to integrate changes from a source branch into a target branch
 
 1. Identify the source branch and target branch from the user's request and repository state. Confirm the intended direction of integration.
 2. Check the current branch and working tree before starting. Preserve unrelated changes and keep them out of the integration.
-3. Unless the user or repository instructions specify another method, record the source branch's full tip commit SHA with `git rev-parse <source-branch>^{commit}`, switch to the target branch, and run `git merge --squash <recorded-sha>`. Follow an explicit request for a regular merge, retained merge commit, or other integration method.
+3. Record the source branch's full tip commit SHA with `git rev-parse <source-branch>^{commit}`.
+4. Unless the user or repository instructions already specify the integration method, ask the user to choose one before starting:
+   - **Squash merge**: `git merge --squash <recorded-sha>` — combines all source commits into one integration commit on the target branch.
+   - **Merge**: `git merge <recorded-sha>` — retains the source commits and creates a merge commit (or fast-forwards).
+   Follow an explicit request for either method or another integration method without asking again.
+5. Switch to the target branch and run the chosen integration command.
 
 **Complete preparation** when the source, target, and integration method are clear, and the integration operation has started from the target branch.
 
