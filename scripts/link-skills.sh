@@ -245,11 +245,10 @@ select_items() {
 }
 
 link_skill() {
-  local source="$1" target="$2" destination relative_source choice backup=''
+  local source="$1" target="$2" destination choice backup=''
   destination="$(dirname -- "$target")"
-  relative_source="$("$REALPATH_BIN" -m --relative-to="$destination" -- "$(dirname -- "$source")")/${source##*/}" || return 1
   LINK_RESULT=existing
-  if [[ -L "$target" && "$target" -ef "$source" && "$(readlink -- "$target")" != /* ]]; then
+  if [[ -L "$target" && "$target" -ef "$source" && "$(readlink -- "$target")" == /* ]]; then
     return 0
   fi
 
@@ -262,7 +261,7 @@ link_skill() {
     else
       say 'Existing file or other filesystem entry.'
     fi
-    say "Replacement link → $relative_source"
+    say "Replacement link → $source"
     say 'Overwriting moves the existing entry into a backup directory beside it.'
     ask choice 'Overwrite this conflict? [y/N]'
     if [[ ! "$choice" =~ ^[Yy]$ ]]; then
@@ -280,7 +279,7 @@ link_skill() {
 
   # Passing the parent prevents following a skill directory that appeared
   # after review. Never force ln to overwrite an unreviewed entry.
-  if ! ln -s -- "$relative_source" "$destination/"; then
+  if ! ln -s -- "$source" "$destination/"; then
     if [[ -n "$backup" ]]; then
       if [[ ! -e "$target" && ! -L "$target" ]]; then
         if mv -- "$backup/original" "$target"; then
@@ -300,31 +299,19 @@ link_skill() {
     return 1
   fi
   if [[ -n "$backup" ]]; then LINK_RESULT=replaced; else LINK_RESULT=created; fi
-  say "Linked: $target → $relative_source"
+  say "Linked: $target → $source"
 }
 
 run_wizard() {
   TOTAL_STAGES=3
   # Choices are used only for this run; ignore unrelated dotenv defaults.
   ENV_FILE=/dev/null
-  local search_dir source_dir source name destination target relative_source index choice
+  local search_dir source_dir source name destination target index choice
   local created=0 replaced=0 existing=0 conflicts=0
   local -a skills=() destinations=() selected_skills=() selected_destinations=()
 
   if [[ ! -t 0 ]]; then
     printf 'Run this wizard in an interactive terminal.\n' >&2
-    exit 1
-  fi
-  REALPATH_BIN=''
-  for candidate in realpath grealpath; do
-    if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -m --relative-to=/ -- / >/dev/null 2>&1; then
-      REALPATH_BIN="$candidate"
-      break
-    fi
-  done
-  if [[ -z "$REALPATH_BIN" ]]; then
-    printf 'This wizard requires realpath with -m and --relative-to support (GNU coreutils).\n' >&2
-    printf 'Install it with: brew install coreutils\n' >&2
     exit 1
   fi
   search_dir="$(pwd -P)"
@@ -373,13 +360,12 @@ run_wizard() {
     for name in "${selected_skills[@]}"; do
       source="$source_dir/$name"
       target="$destination/$name"
-      relative_source="$("$REALPATH_BIN" -m --relative-to="$destination" -- "$(dirname -- "$source")")/${source##*/}"
-      if [[ -L "$target" && "$target" -ef "$source" && "$(readlink -- "$target")" != /* ]]; then
-        note "Already linked with a relative path: $target"
+      if [[ -L "$target" && "$target" -ef "$source" && "$(readlink -- "$target")" == /* ]]; then
+        note "Already linked with an absolute path: $target"
       elif [[ -e "$target" || -L "$target" ]]; then
         warn "Conflict; will ask whether to overwrite: $target"
       else
-        say "$target → $relative_source"
+        say "$target → $source"
       fi
     done
   done
@@ -413,7 +399,7 @@ run_wizard() {
   done
   finish
   say "Created: $created; overwritten: $replaced; already linked: $existing; conflicts skipped: $conflicts."
-  note 'Links use paths relative to the destination directory. Re-run if that relative layout changes.'
+  note 'Links use absolute source paths. Re-run from the new repository location if it moves.'
 }
 
 run_wizard "$@"; exit
