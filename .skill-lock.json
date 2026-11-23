@@ -1,6 +1,13 @@
 {
   "version": 3,
   "skills": {
+    "in-your-own-words": {
+      "source": "../../.claude/skills/in-your-own-words",
+      "sourceType": "local",
+      "skillPath": "SKILL.md",
+      "installedAt": "2026-11-23T11:41:45.000Z",
+      "updatedAt": "2026-11-23T11:41:45.000Z"
+    },
     "improve-codebase-architecture": {
       "source": "mattpocock/skills",
       "sourceType": "github",

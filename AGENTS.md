@@ -10,7 +10,7 @@ This project authors instructions for agents: behavioral rules, skills, workflow
 
 - `.agents/AGENTS.md` provides the base heading always included by the prompt generator.
 - `skills/<skill-name>/` holds `SKILL.md` entry points and references.
-- `.skill-lock.json` records the upstream source of each skill.
+- `.skill-lock.json` records each managed skill's source: an upstream repository, or a local path for skills kept outside this repository.
 - `.claude/rules/` holds Claude-specific rules with YAML `paths` frontmatter.
 - `.codex/` contains Codex-specific configuration and adaptations.
 
